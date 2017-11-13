@@ -1,0 +1,24 @@
+{
+    "staging": {
+        "aws_region": "us-east-1",
+        "django_settings": "configuration.settings",
+        "profile_name": "piquantmag",
+        "project_name": "piquantmag",
+        "runtime": "python3.6",
+        "s3_bucket": "piquantmag",
+        "domain": "staging.piquantmag.com",
+        "lets_encrypt_expression": "rate(15 days)",
+        "lets_encrypt_key": "s3://piquantmag/piquantmag.key"
+    }
+    "production": {
+        "aws_region": "us-east-1",
+        "django_settings": "configuration.settings",
+        "profile_name": "piquantmag",
+        "project_name": "piquantmag",
+        "runtime": "python3.6",
+        "s3_bucket": "piquantmag",
+        "domain": "piquantmag.com",
+        "lets_encrypt_expression": "rate(15 days)",
+        "lets_encrypt_key": "s3://piquantmag/piquantmag.key"
+    }
+}

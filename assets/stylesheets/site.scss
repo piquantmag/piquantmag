@@ -1,0 +1,17 @@
+@import 'settings';
+@import 'typography';
+@import 'layout';
+
+#mc_embed_signup {
+    & input.email, & .button {
+        font-family: $body-font-family;
+        font-size: 1rem;
+    }
+
+    & .button {
+        background: #666666;
+    }
+}
+
+@include typography;
+@include layout;

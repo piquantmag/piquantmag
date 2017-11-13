@@ -1,0 +1,23 @@
+@mixin layout {
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    * + * {
+        margin-top: 1.5em;
+    }
+
+    .no-margin {
+        margin: 0;
+    }
+
+    .content {
+        width: 75vw;
+        margin: 0 auto;
+    }
+
+    .center {
+        margin: 0 auto;
+    }
+}

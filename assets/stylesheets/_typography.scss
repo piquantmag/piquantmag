@@ -1,0 +1,71 @@
+@import 'settings';
+
+@function headings($from:1, $to:6) {
+    @if $from == $to {
+        @return 'h#{$from}';
+    } @else {
+        @return 'h#{$from},' + headings($from+1, $to);
+    }
+}
+
+@mixin typography {
+    body {
+        font-size: $body-font-size;
+        font-family: $body-font-family;
+    }
+
+    p {
+        font-size: 1.2rem;
+        line-height: 1.5;
+        word-wrap: break-word;
+        hyphens: auto;
+        max-width: 750px;
+    }
+
+    p + p {
+        text-indent: 2em;
+        margin-top: 0;
+    }
+
+    h1 {
+        font-family: $impact-font-family;
+        font-weight: $heading-font-weight;
+        text-align: center;
+    }
+
+    #{headings(2, 6)} {
+        font-family: $heading-font-family;
+        font-weight: $heading-font-weight;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 6.2rem;
+        margin: 3.1rem 0;
+    }
+
+    h2 {
+        font-size: 3.2rem;
+        margin: 1.6rem 0;
+    }
+
+    h3 {
+        font-size: 2.4rem;
+        margin: 1.2rem 0;
+    }
+
+    h4 {
+        font-size: 1.8rem;
+        margin: 0.9rem 0;
+    }
+
+    h5 {
+        font-size: 1.4rem;
+        margin: 0.7rem 0;
+    }
+
+    h6 {
+        font-size: 1.2rem;
+        margin: 0.6rem 0;
+    }
+}
