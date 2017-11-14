@@ -3,6 +3,13 @@
 <!doctype html>
 <html>
     <head>
+        {% block google_analytics %}
+            {% if ENVIRONMENT == 'production' %}
+                {% include '__i_google_analytics.html' %}
+            {% else %}
+                <!-- google analytics will go here -->
+            {% endif %}
+        {% endblock google_analytics %}
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
