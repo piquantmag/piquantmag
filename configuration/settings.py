@@ -53,6 +53,8 @@ TEMPLATES = [
     },
 ]
 
+TEMPLATE_VISIBLE_SETTINGS = ['ENVIRONMENT']
+
 WSGI_APPLICATION = 'configuration.wsgi.application'
 
 DATABASES = {
