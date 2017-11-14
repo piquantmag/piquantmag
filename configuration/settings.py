@@ -30,7 +30,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 ]
+
+ROLLBAR = {
+    'access_token': get_env_var('ROLLBAR_ACCESS_TOKEN'),
+    'environment': ENVIRONMENT,
+    'root': BASE_DIR,
+    'exception_level_filters': [
+        (Http404, 'ignored'),
+    ]
+}
 
 ROOT_URLCONF = 'configuration.urls'
 

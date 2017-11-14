@@ -12,10 +12,11 @@ name = "pypi"
 [packages]
 
 zappa = "==0.45.1"
-Django = "==1.11.7"
+django = "==1.11.7"
 django-storages = "==1.6.5"
 "boto3" = "==1.4.7"
 mysqlclient = "==1.3.12"
+rollbar = "==0.13.17"
 
 
 [requires]
