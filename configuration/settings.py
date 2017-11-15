@@ -1,5 +1,7 @@
 import os
 
+from django.http import Http404
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = os.getenv('SECRET_KEY')
@@ -34,12 +36,13 @@ MIDDLEWARE = [
 ]
 
 ROLLBAR = {
-    'access_token': get_env_var('ROLLBAR_ACCESS_TOKEN'),
+    'access_token': os.getenv('ROLLBAR_ACCESS_TOKEN'),
     'environment': ENVIRONMENT,
     'root': BASE_DIR,
     'exception_level_filters': [
         (Http404, 'ignored'),
-    ]
+    ],
+    'handler': 'blocking',
 }
 
 ROOT_URLCONF = 'configuration.urls'
