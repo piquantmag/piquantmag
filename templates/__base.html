@@ -16,14 +16,27 @@
 
         <meta name="google-site-verification" content="maboi7hHdqtxKfUHLE1A9WqKsDcYSaZ7YLXcb8qkOTQ" />
 
-        <meta name="keywords" content="{% block page_keywords %}{% endblock %}">
-        <meta name="description" content="{% block page_description %}{% endblock %}">
+        <meta name="description" content="{% block page_description %}{% firstof page_description settings.DEFAULT_PAGE_DESCRIPTION %}{% endblock %}">
+
+        <meta name="og:type" content="{% block og_type %}website{% endblock %}">
+        <meta name="og:title" content="{% block og_title %}Piquant{% endblock %}">
+        <meta name="og:url" content="{% block og_url %}https://{{ request.META.HTTP_HOST }}{{ request.get_full_path }}{% endblock %}">
+        <meta name="og:description" content="{% block og_description %}{% firstof page_description settings.DEFAULT_PAGE_DESCRIPTION %}{% endblock %}">
+        {% block og_images %}
+        <meta name="og:image" content="https://piquantmag.com/static/images/piquant.png">
+        <meta name="og:image:height" content="500">
+        <meta name="og:image:width" content="500">
+        {% endblock og_images %}
+        {% block og_extras %}{% endblock %}
+
+        {% block extra_meta_tags %}{% endblock %}
 
         <title>{% block page_title %}{% endblock %}</title>
 
         <link href="https://fonts.googleapis.com/css?family=IM+Fell+English+SC" rel="stylesheet">
         <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
         <link href="{% static 'stylesheets/site.css' %}" rel="stylesheet">
+        <link rel="icon" href="{% static 'images/pq.png' %}">
     </head>
     <body>
         <div class="content">
