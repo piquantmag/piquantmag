@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-TEMPLATE_VISIBLE_SETTINGS = ['ENVIRONMENT']
+TEMPLATE_VISIBLE_SETTINGS = ['ENVIRONMENT', 'FACEBOOK_APP_ID', 'DEFAULT_PAGE_DESCRIPTION']
 
 WSGI_APPLICATION = 'configuration.wsgi.application'
 
@@ -121,3 +121,6 @@ AWS_S3_CUSTOM_DOMAIN = f'static-{ENVIRONMENT}.piquantmag.com'
 
 STATIC_URL = '/static/' if DEBUG else f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 ADMIN_URL = os.getenv('ADMIN_URL', r'^admin/')
+
+DEFAULT_PAGE_DESCRIPTION = 'A publication dedicated to uncovering culture, history, traditions, and secrets about the food we eat every day.'
+FACEBOOK_APP_ID = '1424778977620660'
