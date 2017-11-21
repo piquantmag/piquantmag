@@ -2,6 +2,10 @@
 
 {% block error_page_title %}Page Not Found{% endblock %}
 
+{% block extra_meta_tags %}
+<meta name="robots" content="noindex">
+{% endblock extra_meta_tags %}
+
 {% block error_title %}Not Found{% endblock %}
 {% block error_message %}
 The page you are looking for is absolutely nowhere to be found.
