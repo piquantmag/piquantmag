@@ -1,0 +1,9 @@
+{% extends 'error_pages/__base.html' %}
+
+{% block error_page_title %}Error{% endblock %}
+
+{% block error_title %}Error{% endblock %}
+{% block error_message %}
+Something went wrong. Try again later or <a href="{% url 'landing:landing' %}">go back home</a> for now!
+If you continue experiencing issues, please <a href="mailto:support@piquantmag.com">let us know</a>.
+{% endblock error_message %}

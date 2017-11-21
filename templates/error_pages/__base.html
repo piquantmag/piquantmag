@@ -1,0 +1,12 @@
+{% extends '__base_no_google_analytics.html' %}
+
+{% block title %}{% block error_page_title %}{% endblock %} | {{ block.super }}{% endblock %}
+
+{% block extra_meta_tags %}
+<meta name="robots" content="noindex">
+{% endblock extra_meta_tags %}
+
+{% block content %}
+<h1>{% block error_title %}{% endblock %}</h1>
+<p class="center">{% block error_message %}{% endblock %}</p>
+{% endblock content %}
