@@ -104,3 +104,6 @@ ENV/
 .sass-cache/
 *.css
 *.css.map
+
+# JetBrains
+.idea/
