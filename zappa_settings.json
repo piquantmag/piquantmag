@@ -8,7 +8,8 @@
         "s3_bucket": "piquantmag",
         "domain": "staging.piquantmag.com",
         "lets_encrypt_expression": "rate(15 days)",
-        "lets_encrypt_key": "s3://piquantmag/piquantmag.key"
+        "lets_encrypt_key": "s3://piquantmag/piquantmag.key",
+        "exclude": ["node_modules/*"]
     },
     "production": {
         "aws_region": "us-east-1",
@@ -19,6 +20,7 @@
         "s3_bucket": "piquantmag",
         "domain": "piquantmag.com",
         "lets_encrypt_expression": "rate(15 days)",
-        "lets_encrypt_key": "s3://piquantmag/piquantmag.key"
+        "lets_encrypt_key": "s3://piquantmag/piquantmag.key",
+        "exclude": ["node_modules/*"]
     }
 }
