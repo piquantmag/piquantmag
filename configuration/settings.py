@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'webpack_loader',
     'storages',
     'landing',
 ]
@@ -107,8 +108,10 @@ USE_TZ = True
 if IS_PRODUCTION or IS_STAGING:
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+ASSETS_DIR = os.path.join(BASE_DIR, 'assets')
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'assets'),
+    ASSETS_DIR,
 ]
 
 BUCKET_PREFIX = os.getenv('BUCKET_PREFIX')
@@ -120,7 +123,18 @@ AWS_IS_GZIPPED = True
 AWS_S3_CUSTOM_DOMAIN = f'static-{ENVIRONMENT}.piquantmag.com'
 
 STATIC_URL = '/static/' if DEBUG else f'https://{AWS_S3_CUSTOM_DOMAIN}/'
-ADMIN_URL = os.getenv('ADMIN_URL', r'^admin/')
+ADMIN_URL = os.getenv('ADMIN_URL', 'admin/')
 
 DEFAULT_PAGE_DESCRIPTION = 'A publication dedicated to uncovering culture, history, traditions, and secrets about the food we eat every day.'
 FACEBOOK_APP_ID = '1424778977620660'
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'dist/',  # must end with slash
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}

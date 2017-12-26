@@ -100,10 +100,12 @@ ENV/
 # mypy
 .mypy_cache/
 
-# SASS
+# Static Assets
 .sass-cache/
 *.css
 *.css.map
+node_modules/
+webpack-stats.json
 
 # JetBrains
 .idea/

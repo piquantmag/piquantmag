@@ -1,4 +1,5 @@
 {% load static %}
+{% load webpack_loader %}
 
 <!doctype html>
 <html>
@@ -37,13 +38,16 @@
 
         <link href="https://fonts.googleapis.com/css?family=IM+Fell+English+SC|Spectral:300" rel="stylesheet">
         <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
-        <link href="{% static 'stylesheets/site.css' %}" rel="stylesheet">
+        {% render_bundle 'main' 'css' %}
         <link rel="icon" href="{% static 'images/pq.png' %}">
     </head>
     <body>
         <div class="content">
         {% block content %}{% endblock content %}
         </div>
+        {% block javascript %}
+            {% render_bundle 'main' 'js' %}
+        {% endblock javascript %}
         <!-- Additional JavaScript will go here -->
     </body>
 </html>
