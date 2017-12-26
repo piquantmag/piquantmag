@@ -1,4 +1,6 @@
-{% extends '__base_no_google_analytics.html' %}
+{% extends '__base.html' %}
+
+{% block google_analytics %}{% endblock %}
 
 {% block title %}{% block error_page_title %}{% endblock %} | {{ block.super }}{% endblock %}
 
