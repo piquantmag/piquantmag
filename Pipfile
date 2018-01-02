@@ -20,6 +20,7 @@ rollbar = "*"
 django-webpack-loader = "*"
 django-markupfield = "*"
 django-ordered-model = "*"
+markdown = "*"
 
 
 [requires]
