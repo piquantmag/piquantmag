@@ -4,72 +4,87 @@
     @if $from == $to {
         @return 'h#{$from}';
     } @else {
-        @return 'h#{$from},' + headings($from+1, $to);
+        @return 'h#{$from},' + headings($from + 1, $to);
     }
 }
 
 @mixin typography {
-    body {
-        font-size: $body-font-size;
+    /*
+    // Base setup
+    */
+    html {
         font-family: $body-font-family;
+        font-size: $body-font-reset-size;
+        color: $body-font-color;
     }
 
+    body {
+        font-size: $base-font-size-rem;
+    }
+
+    /*
+    // Paragraphs
+    */
     p {
-        font-size: 1.2rem;
-        line-height: 1.5;
+        font-size: $paragraph-font-size-rem;
+        line-height: $paragraph-line-height;
         word-wrap: break-word;
         hyphens: auto;
-        max-width: 750px;
+        max-width: $paragraph-max-width;
+        margin: 0 auto;
+        display: table;
     }
 
     p + p {
-        text-indent: 2em;
-        margin-top: 0;
+        text-indent: $paragraph-indent;
+        margin-top: #{$paragraph-spacing-rem}rem;
     }
 
-    h1 {
-        font-family: $impact-font-family;
+    /*
+    // Headings
+    */
+    #{headings(1, 6)} {
         font-weight: $heading-font-weight;
         text-align: center;
+        line-height: $heading-line-height;
     }
 
     #{headings(2, 6)} {
         font-family: $heading-font-family;
-        font-weight: $heading-font-weight;
-        text-align: center;
     }
 
     h1 {
-        font-size: 6.2rem;
-        margin: 3.1rem 0;
+        font-size: $base-font-size-rem * 9 / 2;
+        margin: $base-font-size-rem * 9 / 4;
+        font-family: $impact-font-family;
     }
 
-    h2 {
-        font-size: 3.2rem;
-        margin: 1.6rem 0;
+    @for $heading-level from 2 through 6 {
+        $heading-font-size-rem: $base-font-size-rem * 1/2 * ((6 - $heading-level) + 1);
+        $heading-margin-rem: $heading-font-size-rem / 2;
+
+        h#{$heading-level} {
+            font-size: $heading-font-size-rem;
+            margin: $heading-margin-rem 0;
+        }
     }
 
-    h3 {
-        font-size: 2.4rem;
-        margin: 1.2rem 0;
-    }
-
-    h4 {
-        font-size: 1.8rem;
-        margin: 0.9rem 0;
-    }
-
-    h5 {
-        font-size: 1.4rem;
-        margin: 0.7rem 0;
-    }
-
-    h6 {
-        font-size: 1.2rem;
-        margin: 0.6rem 0;
-    }
-
+    /*
+    // Special emphasis font
+    */
     .piquant {
         font-family: $impact-font-family;
+    }
+
+    /*
+    // Utilities
+    */
+    .text-center {
+        display: block !important;
+        text-align: center !important;
+    }
+
+    .underline {
+        text-decoration: underline !important;
     }
 }

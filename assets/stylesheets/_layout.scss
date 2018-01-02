@@ -5,7 +5,11 @@
     }
 
     * + * {
-        margin-top: 1.5em;
+        margin-top: 1.5rem;
+    }
+
+    body {
+        margin: 0;
     }
 
     .no-margin {
@@ -15,9 +19,11 @@
     .content {
         width: 75vw;
         margin: 0 auto;
+        max-width: 750px;
     }
 
     .center {
         margin: 0 auto;
+        text-align: center;
     }
 }

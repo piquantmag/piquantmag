@@ -1,0 +1,24 @@
+@import '../settings';
+
+@mixin footer {
+    footer {
+        font-size: $footer-font-size-rem;
+        border-top: 1px solid $footer-border-color;
+        padding: $base-padding * 4;
+        margin-top: 5rem;
+        display: flex;
+        justify-content: space-evenly;
+
+        ul,
+        ol {
+            display: flex;
+            flex-direction: column;
+
+            li {
+                & a {
+                    display: block;
+                }
+            }
+        }
+    }
+}

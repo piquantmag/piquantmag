@@ -1,0 +1,30 @@
+@import '../settings';
+
+@mixin nav {
+    body {
+        padding-top: 5rem;
+    }
+
+    nav {
+        font-size: $nav-font-size-rem;
+        border-bottom: 1px solid $nav-border-color;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: $nav-background-color;
+        z-index: 100;
+
+        ul, ol {
+            display: flex;
+            justify-content: space-evenly;
+
+            li {
+                & a {
+                    display: block;
+                    padding: $base-padding * 2;
+                }
+            }
+        }
+    }
+}

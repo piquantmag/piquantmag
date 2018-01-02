@@ -1,0 +1,39 @@
+@import '../settings';
+
+@mixin button {
+    padding: $base-padding ($base-padding * 2);
+    border: 2px solid $button-color;
+    background: $button-color;
+    color: map-get($colors, 'white');
+    font-family: $body-font-family;
+    font-size: $base-font-size-rem;
+
+    &:hover {
+        cursor: pointer;
+        background: $button-hover-color;
+        border-color: $button-hover-color;
+    }
+
+    transition: all 0.2s ease-in-out;
+}
+
+@mixin secondary-button {
+    color: map-get($colors, 'black');
+    background: map-get($colors, 'white');
+
+    &:hover {
+        background: $button-color;
+        border-color: $button-color;
+    }
+}
+
+@mixin buttons {
+    .button,
+    button {
+        @include button;
+
+        &.secondary {
+            @include secondary-button;
+        }
+    }
+}

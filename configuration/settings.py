@@ -2,6 +2,8 @@ import os
 
 from django.http import Http404
 
+import markdown
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = os.getenv('SECRET_KEY')
@@ -13,6 +15,9 @@ DEBUG = ENVIRONMENT == 'dev'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
+SITE_ID = 1
+SITE_NAME = 'Piquant'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -20,9 +25,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
+    'django.contrib.sites',
     'webpack_loader',
+    'markupfield',
+    'ordered_model',
     'storages',
     'landing',
+    'zine',
 ]
 
 MIDDLEWARE = [
@@ -125,7 +135,10 @@ AWS_S3_CUSTOM_DOMAIN = f'static-{ENVIRONMENT}.piquantmag.com'
 STATIC_URL = '/static/' if DEBUG else f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 ADMIN_URL = os.getenv('ADMIN_URL', 'admin/')
 
-DEFAULT_PAGE_DESCRIPTION = 'A publication dedicated to uncovering culture, history, traditions, and secrets about the food we eat every day.'
+DEFAULT_PAGE_DESCRIPTION = (
+    'A publication dedicated to uncovering culture, history, traditions, and secrets about the food we eat every day.'
+)
+
 FACEBOOK_APP_ID = '1424778977620660'
 
 WEBPACK_LOADER = {
@@ -138,3 +151,7 @@ WEBPACK_LOADER = {
         'IGNORE': ['.+\.hot-update.js', '.+\.map']
     }
 }
+
+MARKUP_FIELD_TYPES = (
+    ('markdown', markdown.markdown),
+)

@@ -1,0 +1,42 @@
+@import '../settings';
+
+@mixin card {
+    display: flex;
+
+    .card-image {
+        flex-basis: 33%;
+
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 0;
+        flex-basis: 66%;
+        border: 1px solid $card-border-color;
+        border-left: none;
+        padding: $base-padding * 4;
+
+        .card-title {
+            font-size: 3rem;
+        }
+    }
+
+    &:hover {
+        box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.25);
+    }
+
+    transition: all 0.25s ease-in-out;
+}
+
+@mixin cards {
+    .card {
+        @include card;
+    }
+}
