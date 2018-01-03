@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load webpack_loader %}
 
 <!doctype html>
@@ -52,16 +53,16 @@
         </div>
         <footer>
             <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Newsletter</a></li>
+                <li><a href="{% url 'about:about' %}">{% trans 'About' %}</a></li>
+                <li><a href="#">{% trans 'Contact' %}</a></li>
+                <li><a href="#">{% trans 'Newsletter' %}</a></li>
             </ul>
             <ul>
                 <li><a href="https://www.facebook.com/piquantmagazine">Facebook</a></li>
                 <li><a href="https://www.instagram.com/piquantmagazine">Instagram</a></li>
                 <li><a href="https://www.twitter.com/piquantmag">Twitter</a></li>
             </ul>
-            &copy; {% now "Y" %} Piquant. All Rights Reserved.
+            &copy; {% now "Y" %} Piquant. {% trans 'All Rights Reserved' %}.
         </footer>
         {% block javascript %}
             {% render_bundle 'main' 'js' %}

@@ -5,6 +5,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
 from django.views.generic import TemplateView
 
+import about.urls
 import configuration.feeds
 import configuration.sitemaps
 import landing.urls
@@ -28,6 +29,7 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     path('sitemap.xml', sitemap, {'sitemaps': full_sitemap}, name='sitemap'),
     path('feed/', configuration.feeds.IssueFeed(), name='feed'),
+    path('about/', include(about.urls)),
     path('', include(landing.urls)),
     path('', include(zine.urls)),
 ]
