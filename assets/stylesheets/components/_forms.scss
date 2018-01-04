@@ -1,0 +1,14 @@
+@import '../settings';
+
+@mixin text-input {
+    font-size: $base-font-size-rem;
+    font-family: $body-font-family;
+    padding: $base-padding;
+    border: 2px solid map-get($colors, 'light-gray');
+}
+
+@mixin forms {
+    input {
+        @include text-input;
+    }
+}

@@ -1,18 +1,18 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4398bcbf5b6f410c80c15f90efb8c05cb2ff71fa313d153c9cbe21f9ab4c3d8c"
+            "sha256": "9880c7e302cc3d37eac9e510794eccce4006d274424c9c75ba568da8e5a86b5f"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
-            "implementation_version": "3.6.3",
+            "implementation_version": "3.6.4",
             "os_name": "posix",
             "platform_machine": "x86_64",
             "platform_python_implementation": "CPython",
             "platform_release": "17.3.0",
             "platform_system": "Darwin",
             "platform_version": "Darwin Kernel Version 17.3.0: Thu Nov  9 18:09:22 PST 2017; root:xnu-4570.31.3~1/RELEASE_X86_64",
-            "python_full_version": "3.6.3",
+            "python_full_version": "3.6.4",
             "python_version": "3.6",
             "sys_platform": "darwin"
         },
@@ -45,17 +45,17 @@
         },
         "boto3": {
             "hashes": [
-                "sha256:d407829f895b4e4bb384c50242c28f44a61514c8d72238b5e3d763122e396886",
-                "sha256:ce8da4c1f5dd965a0d055b6842eb2d93348aded99d7e3c32f8aaea2b6921df8a"
+                "sha256:00a384f703d7abdc9eb932e64404060b6287543afbd03cae0f811dc29aa2c129",
+                "sha256:c41540a1d74a4ef7c642d91cb47dae884eafe6665d76a1b9ce1032e3aabde56c"
             ],
-            "version": "==1.5.6"
+            "version": "==1.5.7"
         },
         "botocore": {
             "hashes": [
-                "sha256:c3d6954f2d8bd97d826d09077bff73da2f28880e9623b3e0b0a9fe899be6cd3f",
-                "sha256:19aef3d362b887bcfa30bf19433d2b2f6d6897587afe397ada20e8a3603850ae"
+                "sha256:b15773f65e4fb2fd58709a7b8453f524ec0d04c86e2052b0dd3c938b4eb38be2",
+                "sha256:e4513a02f68e7efd7494ee56db201d87620218ca879aae361abbb71bcde3aa5f"
             ],
-            "version": "==1.8.20"
+            "version": "==1.8.21"
         },
         "certifi": {
             "hashes": [
@@ -90,6 +90,19 @@
                 "sha256:9614851d4a7ff8cbd32b73c6076441f377c45a5bbff7e771798fb02c43c31f47"
             ],
             "version": "==2.0"
+        },
+        "django-markupfield": {
+            "hashes": [
+                "sha256:57e6e3884e5f5e5ce1dcb29e04c3019ee99ed38f219295abe03f558e4168f521",
+                "sha256:0b43a467b6b8e32a3bad99e6d1c489568b93e709f4d7d82d82da22ae9367840a"
+            ],
+            "version": "==1.4.3"
+        },
+        "django-ordered-model": {
+            "hashes": [
+                "sha256:740b89a3a6ecbee4ee3e227a00b4300f167c7290781b323c8be6dc0985c60e48"
+            ],
+            "version": "==1.4.3"
         },
         "django-storages": {
             "hashes": [
@@ -157,6 +170,12 @@
                 "sha256:cbe35f0642206a4adfb4855f80d55e273bdacc083011eba5f9ed3beedf0879fa"
             ],
             "version": "==0.19.0"
+        },
+        "markdown": {
+            "hashes": [
+                "sha256:cfa536d1ee8984007fcecc5a38a493ff05c174cb74cb2341dafd175e6bc30851"
+            ],
+            "version": "==2.6.10"
         },
         "mysqlclient": {
             "hashes": [

@@ -2,18 +2,21 @@
 @import 'settings';
 @import 'typography';
 @import 'layout';
-
-#mc_embed_signup {
-    & input.email, & .button {
-        font-family: $body-font-family;
-        font-size: 1rem;
-    }
-
-    & .button {
-        background: #666666;
-    }
-}
+@import 'components/links';
+@import 'components/lists';
+@import 'components/nav';
+@import 'components/footer';
+@import 'components/buttons';
+@import 'components/forms';
+@import 'components/cards';
 
 @include utils;
 @include typography;
 @include layout;
+@include links;
+@include lists;
+@include nav;
+@include footer;
+@include buttons;
+@include forms;
+@include cards;

@@ -1,0 +1,27 @@
+{% extends '__base.html' %}
+
+{% load i18n %}
+
+{% block page_title %}{{ article }} | {{ issue }} | {{ block.super }}{% endblock %}
+{% block page_description %}{{ article.synopsis }}{% endblock %}
+
+{% block og_title %}{{ article }} | {{ issue }} | {{ block.super }}{% endblock %}
+{% block og_description %}{{ article.description }}{% endblock %}
+
+{% block content %}
+    <header>
+        <h1>{{ article }}</h1>
+        <span class="text-center">
+            {% trans 'From the issue' %} <a href="{% url 'zine:issue' issue.slug %}" class="piquant underline">{{ issue.title }}</a>
+        </span>
+        {% if user.is_staff %}
+        <div class="text-center">
+            <a href="{% url 'admin:zine_article_change' article.id %}" class="underline">{% trans 'Edit' %}</a>
+        </div>
+        {% endif %}
+    </header>
+
+    <article>
+        {{ article.body.rendered|safe }}
+    </article>
+{% endblock content %}

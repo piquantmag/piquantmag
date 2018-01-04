@@ -1,0 +1,57 @@
+{% extends '__base.html' %}
+
+{% load i18n %}
+
+{% block page_title %}{{ issue }} | {{ block.super }}{% endblock %}
+{% block page_description %}{{ issue.synopsis }}{% endblock %}
+
+{% block og_title %}{{ issue }} | {{ block.super }}{% endblock %}
+{% block og_description %}{{ issue.synopsis }}{% endblock %}
+
+{% block content %}
+    <header>
+        <h1>{{ issue.title }}</h1>
+        <span class="text-center">
+            {% trans 'Issue' %} {{ issue.issue_number }}
+        </span>
+        {% if user.is_staff %}
+        <div class="text-center">
+            <a href="{% url 'admin:zine_issue_change' issue.id %}" class="underline">{% trans 'Edit' %}</a>
+        </div>
+        {% endif %}
+    </header>
+    <section>
+        <p>
+            {{ issue.synopsis }}
+        </p>
+    </section>
+
+    <section>
+        <h2>{% trans 'Articles' %}</h2>
+        {% with articles=issue.article_set.all %}
+            {% if articles %}
+                <ol>
+                    {% for article in articles %}
+                        <li>
+                            <div class="card">
+                                <div class="card-image">
+                                    <a href="{% url 'zine:article' issue.slug article.slug %}">
+                                        <img src="https://www.ideadigezt.com/wp-content/uploads/2017/02/Salt-014-1024x614.jpg" />
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <header class="card-title">
+                                        <a href="{% url 'zine:article' issue.slug article.slug %}">
+                                            {{ article }}
+                                        </a>
+                                    </header>
+                                    <section class="card-description">{{ article.synopsis }}</section>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ol>
+            {% endif %}
+        {% endwith %}
+    </section>
+{% endblock %}

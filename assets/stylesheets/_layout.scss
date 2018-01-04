@@ -5,19 +5,16 @@
     }
 
     * + * {
-        margin-top: 1.5em;
+        margin-top: 1.5rem;
     }
 
-    .no-margin {
+    body {
         margin: 0;
     }
 
     .content {
         width: 75vw;
         margin: 0 auto;
-    }
-
-    .center {
-        margin: 0 auto;
+        max-width: 750px;
     }
 }

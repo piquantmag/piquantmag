@@ -1,15 +1,44 @@
+$default-line-height: 1.5;
+
 $base-padding: 5px;
 $base-border-radius: 2px;
 
 $colors: (
     'primary': #FF0000,
-    'white': #FFFFFF
+    'white': #FFFFFF,
+    'black': #333333,
+    'light-gray': #CCCCCC
 );
 
+$breakpoint-small: 480px;
+$breakpoint-large: 768px;
+
 $body-font-family: 'Spectral', serif;
-$body-font-size: 62.5%;
+$body-font-reset-size: 62.5%;
+$body-font-color: map-get($colors, 'black');
+
+$base-font-size-rem: 1.6rem;
 
 $heading-font-family: 'Georgia';
 $heading-font-weight: 100;
+$heading-line-height: 1;
 
 $impact-font-family: 'IM Fell English SC';
+
+$paragraph-font-size-rem: 1.8rem;
+$paragraph-line-height: $default-line-height;
+$paragraph-spacing-rem: $default-line-height * 1.5;
+$paragraph-indent: 3rem;
+$paragraph-max-width: 75rem;
+
+$nav-border-color: map-get($colors, 'light-gray');
+$nav-background-color: map-get($colors, 'white');
+$nav-font-size-rem: 2rem;
+
+$footer-font-size-rem: 1.2rem;
+$footer-border-color: map-get($colors, 'light-gray');
+
+$button-color: map-get($colors, 'black');
+$button-hover-color: lighten($button-color, 20);
+
+$card-border-color: map-get($colors, 'light-gray');
