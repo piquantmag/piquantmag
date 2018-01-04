@@ -10,6 +10,9 @@ $colors: (
     'light-gray': #CCCCCC
 );
 
+$breakpoint-small: 480px;
+$breakpoint-large: 768px;
+
 $body-font-family: 'Spectral', serif;
 $body-font-reset-size: 62.5%;
 $body-font-color: map-get($colors, 'black');

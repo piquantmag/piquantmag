@@ -55,7 +55,7 @@
 
     h1 {
         font-size: $base-font-size-rem * 9 / 2;
-        margin: $base-font-size-rem * 9 / 4;
+        margin: #{$base-font-size-rem * 9 / 2 / 2} 0;
         font-family: $impact-font-family;
     }
 
@@ -65,7 +65,7 @@
 
         h#{$heading-level} {
             font-size: $heading-font-size-rem;
-            margin: $heading-margin-rem 0;
+            margin: #{$heading-margin-rem} 0;
         }
     }
 

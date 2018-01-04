@@ -1,5 +1,7 @@
 {% extends '__base.html' %}
 
+{% load i18n %}
+
 {% block page_title %}{{ issue }} | {{ block.super }}{% endblock %}
 {% block page_description %}{{ issue.synopsis }}{% endblock %}
 
@@ -10,11 +12,11 @@
     <header>
         <h1>{{ issue.title }}</h1>
         <span class="text-center">
-            Issue {{ issue.issue_number }}
+            {% trans 'Issue' %} {{ issue.issue_number }}
         </span>
         {% if user.is_staff %}
-        <div class="center">
-            <a href="{% url 'admin:zine_issue_change' issue.id %}" class="underline">Edit</a>
+        <div class="text-center">
+            <a href="{% url 'admin:zine_issue_change' issue.id %}" class="underline">{% trans 'Edit' %}</a>
         </div>
         {% endif %}
     </header>
@@ -25,7 +27,7 @@
     </section>
 
     <section>
-        <h2>Articles</h2>
+        <h2>{% trans 'Articles' %}</h2>
         {% with articles=issue.article_set.all %}
             {% if articles %}
                 <ol>

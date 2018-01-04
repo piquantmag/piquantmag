@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 import ordered_model.models
 import markupfield.fields
@@ -43,7 +44,7 @@ class Issue(ordered_model.models.OrderedModel):
         return all_issues.index(self) + 1
 
     def __str__(self):
-        return f'Issue {self.issue_number}: {self.title}'
+        return _('Issue') + f' {self.issue_number}: {self.title}'
 
 
 class Article(ordered_model.models.OrderedModel):
