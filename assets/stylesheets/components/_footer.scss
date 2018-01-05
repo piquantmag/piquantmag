@@ -1,4 +1,5 @@
 @import '../settings';
+@import 'media-queries';
 
 @mixin footer {
     footer {
@@ -7,16 +8,27 @@
         padding: $base-padding * 4;
         margin-top: 5rem;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-evenly;
+
+        @include respond-to(handhelds) {
+            justify-content: start;
+        }
 
         ul,
         ol {
             display: flex;
             flex-direction: column;
+            list-style: none;
+
+            @include respond-to(handhelds) {
+                flex-basis: 100%;
+            }
 
             li {
                 & a {
                     display: block;
+                    text-decoration: none;
                 }
             }
         }

@@ -60,7 +60,9 @@
                 <li><a href="https://www.instagram.com/piquantmagazine">Instagram</a></li>
                 <li><a href="https://www.twitter.com/piquantmag">Twitter</a></li>
             </ul>
-            &copy; {% now "Y" %} Piquant. {% trans 'All Rights Reserved' %}.
+            <ul>
+                <li>&copy; {% now "Y" %} Piquant. {% trans 'All Rights Reserved' %}.</li>
+            </ul>
         </footer>
         {% block javascript %}
             {% render_bundle 'main' 'js' %}

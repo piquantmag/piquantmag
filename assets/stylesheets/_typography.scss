@@ -31,8 +31,8 @@
         word-wrap: break-word;
         hyphens: auto;
         max-width: $paragraph-max-width;
-        margin: 0 auto;
-        display: table;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     p + p {
@@ -60,7 +60,7 @@
     }
 
     @for $heading-level from 2 through 6 {
-        $heading-font-size-rem: $base-font-size-rem * 1/2 * ((6 - $heading-level) + 1);
+        $heading-font-size-rem: $base-font-size-rem * 1/2 * ((6 - $heading-level) + 2);
         $heading-margin-rem: $heading-font-size-rem / 2;
 
         h#{$heading-level} {

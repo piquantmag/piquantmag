@@ -18,11 +18,13 @@
         ul, ol {
             display: flex;
             justify-content: space-evenly;
+            list-style: none;
 
             li {
                 & a {
                     display: block;
                     padding: $base-padding * 2;
+                    text-decoration: none;
                 }
             }
         }
