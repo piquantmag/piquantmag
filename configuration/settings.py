@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'landing',
     'zine',
     'about',
+    'styleguide',
 ]
 
 MIDDLEWARE = [

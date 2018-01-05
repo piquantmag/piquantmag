@@ -30,7 +30,7 @@
         <h2>{% trans 'Articles' %}</h2>
         {% with articles=issue.article_set.all %}
             {% if articles %}
-                <ol>
+                <ol class="no-bullet">
                     {% for article in articles %}
                         <li>
                             <div class="card">

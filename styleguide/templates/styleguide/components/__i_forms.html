@@ -1,0 +1,43 @@
+{% load i18n %}
+
+<h2 id="forms">{% trans 'Forms' %}</h2>
+<hr />
+<form>
+    <label for="text-input">{% trans 'Text Input' %}</label>
+    <input type="text" id="text-input" placeholder="{% trans 'placeholder' %}"/>
+
+    <fieldset>
+        <legend>{% trans 'Option Sets' %}</legend>
+
+        <input type="radio" name="radio" value="{% trans 'Option 1' %}" id="radio-input-1"/>
+        <label for="radio-input-1">{% trans 'Option 1' %}</label>
+        <br />
+        <input type="radio" name="radio" value="{% trans 'Option 2' %}" id="radio-input-2"/>
+        <label for="radio-input-2">{% trans 'Option 2' %}</label>
+        <br />
+        <input type="radio" name="radio" value="{% trans 'Option 3' %}" id="radio-input-3"/>
+        <label for="radio-input-3">{% trans 'Option 3' %}</label>
+        <br />
+
+        <input type="checkbox" name="checkbox" value="{% trans 'Option 1' %}" id="checkbox-input-1"/>
+        <label for="checkbox-input-1">{% trans 'Option 1' %}</label>
+        <br />
+        <input type="checkbox" name="checkbox" value="{% trans 'Option 2' %}" id="checkbox-input-2"/>
+        <label for="checkbox-input-2">{% trans 'Option 2' %}</label>
+        <br />
+        <input type="checkbox" name="checkbox" value="{% trans 'Option 3' %}" id="checkbox-input-3"/>
+        <label for="checkbox-input-3">{% trans 'Option 3' %}</label>
+    </fieldset>
+
+    <label for="select">Select</label>
+    <select id="select">
+        <option value="1">{% trans 'Option 1' %}</option>
+        <option value="2">{% trans 'Option 2' %}</option>
+        <option value="3">{% trans 'Option 3' %}</option>
+    </select>
+
+    <fieldset>
+        <button type="submit">Submit</button>
+        <button type="reset" class="secondary">Clear</button>
+    </fieldset>
+</form>

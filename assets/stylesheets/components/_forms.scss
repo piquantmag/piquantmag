@@ -1,14 +1,48 @@
 @import '../settings';
 
-@mixin text-input {
-    font-size: $base-font-size-rem;
-    font-family: $body-font-family;
-    padding: $base-padding;
-    border: 2px solid map-get($colors, 'light-gray');
-}
-
 @mixin forms {
-    input {
-        @include text-input;
+    input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
+        height: $button-and-input-height;
+        font-size: $base-font-size-rem;
+        font-family: $body-font-family;
+        padding: 0 $input-horizontal-padding;
+        border: $input-border-width solid $input-border-color;
+    }
+
+    label {
+        font-weight: bold;
+        margin-right: $base-padding;
+    }
+
+
+    input[disabled]:hover {
+        cursor: not-allowed;
+    }
+
+    fieldset {
+        border: none;
+
+        legend {
+            font-weight: bold;
+        }
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+        &:hover {
+            cursor: pointer;
+        }
+
+        &[disabled] + label {
+            color: $disabled-font-color;
+
+            &:hover {
+                cursor: not-allowed;
+            }
+        }
+
+        + label {
+            font-weight: normal;
+        }
     }
 }

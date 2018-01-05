@@ -1,0 +1,23 @@
+{% extends '__base.html' %}
+
+{% load i18n %}
+
+{% block page_title %}{% trans 'Styleguide' %} | {{ block.super }}{% endblock %}
+{% block page_description %}{% trans 'The styleguide for Piquant' %}{% endblock %}
+
+{% block og_title %}{% trans 'Styleguide' %} | {{ block.super }}{% endblock %}
+{% block og_description %}{% trans 'The styleguide for Piquant' %}{% endblock %}
+
+{% block content %}
+    <h1>Styleguide</h1>
+
+    <ol>
+    {% for section in sections %}
+        <li><a href="#{{ section }}">{{ section|capfirst }}</a></li>
+    {% endfor %}
+    </ol>
+
+    {% for section in sections %}
+        {% include 'styleguide/components/__i_'|add:section|add:'.html' %}
+    {% endfor %}
+{% endblock content %}

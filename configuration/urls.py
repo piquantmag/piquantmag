@@ -10,6 +10,7 @@ import configuration.feeds
 import configuration.sitemaps
 import landing.urls
 import zine.urls
+import styleguide.urls
 
 
 SITE = Site.objects.get_current()
@@ -30,6 +31,7 @@ urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps': full_sitemap}, name='sitemap'),
     path('feed/', configuration.feeds.IssueFeed(), name='feed'),
     path('about/', include(about.urls)),
+    path('styleguide/', include(styleguide.urls)),
     path('', include(landing.urls)),
     path('', include(zine.urls)),
 ]

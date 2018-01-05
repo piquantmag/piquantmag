@@ -7,7 +7,9 @@ $colors: (
     'primary': #FF0000,
     'white': #FFFFFF,
     'black': #333333,
-    'light-gray': #CCCCCC
+    'light-gray': #CCCCCC,
+    'disabled-text': #777777,
+    'disabled-background': #EEEEEE
 );
 
 $breakpoint-small: 480px;
@@ -16,6 +18,7 @@ $breakpoint-large: 768px;
 $body-font-family: 'Spectral', serif;
 $body-font-reset-size: 62.5%;
 $body-font-color: map-get($colors, 'black');
+$disabled-font-color: map-get($colors, 'light-gray');
 
 $base-font-size-rem: 1.6rem;
 
@@ -38,7 +41,20 @@ $nav-font-size-rem: 2rem;
 $footer-font-size-rem: 1.2rem;
 $footer-border-color: map-get($colors, 'light-gray');
 
-$button-color: map-get($colors, 'black');
-$button-hover-color: lighten($button-color, 20);
+$button-vertical-padding: $base-padding;
+$button-horizontal-padding: $base-padding * 2;
+$button-border-width: 2px;
+$button-background-color: map-get($colors, 'black');
+$button-text-color: map-get($colors, 'white');
+$button-hover-color: lighten($button-background-color, 20);
+$button-disabled-text-color: map-get($colors, 'disabled-text');
+$button-disabled-background-color: map-get($colors, 'disabled-background');
+
+$button-and-input-height: 4rem;
+
+$input-border-width: 1px;
+$input-border-color: map-get($colors, 'light-gray');
+$input-vertical-padding: $base-padding;
+$input-horizontal-padding: $base-padding * 2;
 
 $card-border-color: map-get($colors, 'light-gray');
