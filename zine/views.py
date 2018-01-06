@@ -1,7 +1,12 @@
+import logging
+
 from django.utils import timezone
-from django.views.generic import DetailView
+from django.views.generic import DetailView, TemplateView
 
 from zine.models import Article, Issue
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class ArticleView(DetailView):
@@ -22,3 +27,22 @@ class IssueView(DetailView):
 
     def get_queryset(self):
         return super().get_queryset().filter(publication_date__lte=timezone.now())
+
+
+class HomeView(TemplateView):
+    template_name = 'zine/home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['latest_issue'] = Issue.objects.latest('publication_date')
+        return context
+
+
+class ManifestView(TemplateView):
+    template_name = 'manifest.json'
+    content_type = 'application/json'
+
+
+class BrowserConfigView(TemplateView):
+    template_name = 'browserconfig.xml'
+    content_type = 'text/xml'

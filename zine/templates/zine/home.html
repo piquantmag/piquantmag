@@ -1,0 +1,23 @@
+{% extends '__base.html' %}
+
+{% load i18n %}
+{% block page_title %}{% if latest_issue %}{% trans 'Issue' %} {{ latest_issue.issue_number }}: {{ latest_issue.title }} | {% endif %}{{ block.super }}{% endblock %}
+{% block page_description %}{% if latest_issue %}{{ latest_issue.synopsis|truncatechars:320 }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+
+{% block og_title %}{% if latest_issue %}{% trans 'Issue' %} {{ latest_issue.issue_number }}: {{ latest_issue.title }} | {% endif %}{{ block.super }}{% endblock %}
+{% block og_description %}{% if latest_issue %}{{ latest_issue.synopsis|truncatechars:320 }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+
+{% block content %}
+    <h1>Piquant</h1>
+    {% if latest_issue %}
+        <header>
+        <h2>{% trans 'Issue' %} {{ latest_issue.issue_number }}: {{ latest_issue.title }}</h2>
+        </header>
+        <section>
+            <p>
+                {{ latest_issue.synopsis }}
+            </p>
+        </section>
+        {% include 'zine/issue/__i_article_set.html' with issue=latest_issue %}
+    {% endif %}
+{% endblock content %}

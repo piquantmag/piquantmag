@@ -2,30 +2,58 @@
 
 <h2 id="lists">{% trans 'Lists' %}</h2>
 <hr />
-<h3>{% trans 'Ordered List' %}</h3>
+<h3>{% trans 'Unordered List' %}</h3>
 <ul>
     <li>One</li>
     <li>Two</li>
-    <li>Three</li>
+    <li>
+        Three
+        <ul>
+            <li>Nested one</li>
+            <li>Nested two</li>
+            <li>Nested three</li>
+        </ul>
+    </li>
 </ul>
 
-<h3>{% trans 'Unordered List' %}</h3>
+<h3>{% trans 'Ordered List' %}</h3>
 <ol>
     <li>One</li>
     <li>Two</li>
-    <li>Three</li>
+    <li>
+        Three
+        <ol>
+            <li>Nested one</li>
+            <li>Nested two</li>
+            <li>Nested three</li>
+        </ol>
+    </li>
 </ol>
 
 <h3>{% trans 'Un-bulleted List' %}</h3>
 <ul class="no-bullet">
     <li>One</li>
     <li>Two</li>
-    <li>Three</li>
+    <li>
+        Three
+        <ul>
+            <li>Nested one</li>
+            <li>Nested two</li>
+            <li>Nested three</li>
+        </ul>
+    </li>
 </ul>
 
 <h3>{% trans 'Inline List' %}</h3>
 <ul class="inline-list">
     <li>One</li>
     <li>Two</li>
-    <li>Three</li>
+    <li>
+        Three
+        <ul>
+            <li>Nested one</li>
+            <li>Nested two</li>
+            <li>Nested three</li>
+        </ul>
+    </li>
 </ul>

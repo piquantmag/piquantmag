@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'markupfield',
     'ordered_model',
     'storages',
-    'landing',
+    'communication',
     'zine',
     'about',
     'styleguide',

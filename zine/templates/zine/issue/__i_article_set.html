@@ -1,0 +1,29 @@
+{% load i18n %}
+
+<section>
+    {% with articles=issue.article_set.all %}
+        {% if articles %}
+            <ol class="no-bullet">
+                {% for article in articles %}
+                    <li>
+                        <div class="card">
+                            <div class="card-image">
+                                <a href="{% url 'zine:article' issue.slug article.slug %}">
+                                    <img src="https://www.ideadigezt.com/wp-content/uploads/2017/02/Salt-014-1024x614.jpg" />
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <header class="card-title">
+                                    <a href="{% url 'zine:article' issue.slug article.slug %}">
+                                        {{ article }}
+                                    </a>
+                                </header>
+                                <section class="card-description">{{ article.synopsis }}</section>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+    {% endwith %}
+</section>
