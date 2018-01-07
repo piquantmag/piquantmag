@@ -69,9 +69,6 @@
             </ul>
         </footer>
         {% block javascript %}
-            <script>
-                window.serviceWorkerPath = "{% static 'javascript/service-worker.js' %}";
-            </script>
             {% render_bundle 'main' 'js' %}
         {% endblock javascript %}
     </body>

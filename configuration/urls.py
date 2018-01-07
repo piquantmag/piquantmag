@@ -32,6 +32,7 @@ urlpatterns = [
     path('feed/', feeds.IssueFeed(), name='feed'),
     path('about/', include(about.urls)),
     path('styleguide/', include(styleguide.urls)),
+    path('service-worker.js', TemplateView.as_view(template_name='service-worker.js', content_type='application/javascript'), name='service_worker'),
     path('', include(communication.urls)),
     path('', include(zine.urls)),
 ]
