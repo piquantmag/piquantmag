@@ -33,6 +33,7 @@ urlpatterns = [
     path('about/', include(about.urls)),
     path('styleguide/', include(styleguide.urls)),
     path('service-worker.js', TemplateView.as_view(template_name='service-worker.js', content_type='application/javascript'), name='service_worker'),
+    path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain'), name='robots'),
     path('', include(communication.urls)),
     path('', include(zine.urls)),
 ]

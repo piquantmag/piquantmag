@@ -1,0 +1,2 @@
+User-agent: *
+Disallow:{% if not IS_PRODUCTION %} /{% endif %}
