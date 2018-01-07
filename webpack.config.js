@@ -1,6 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BundleTracker = require('webpack-bundle-tracker');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     context: __dirname,
@@ -21,6 +22,13 @@ module.exports = {
         ]
     },
     plugins: [
+        new UglifyJsPlugin({
+            test: /\.js($|\?)/i,
+            sourceMap: true,
+            uglifyOptions: {
+                warnings: false
+            }
+        }),
         new ExtractTextPlugin('site-[hash:6].css'),
         new BundleTracker({filename: './webpack-stats.json'})
     ]

@@ -39,6 +39,12 @@
       "sizes": "192x192",
       "type": "image/png",
       "density": "4.0"
+    },
+    {
+      "src": "{% static 'images/pq.png' %}",
+      "sizes": "900x900",
+      "type": "image/png",
+      "density": "4.0"
     }
   ],
   "start_url": "{% url 'zine:home' %}",
