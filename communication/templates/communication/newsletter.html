@@ -1,0 +1,15 @@
+{% extends '__base.html' %}
+
+{% load i18n %}
+
+{% block page_title %}{% trans 'Sign up for our newsletter' %} | {{ block.super }}{% endblock %}
+{% block og_title %}{% trans 'Sign up for our newsletter' %} | {{ block.super }}{% endblock %}
+
+{% block page_description %}{% trans 'Sign up for the Piquant newsletter to get status updates about our first issue!' %}{% endblock %}
+{% block og_description %}{% trans 'Sign up for the Piquant newsletter to get status updates about our first issue!' %}{% endblock %}
+
+{% block content %}
+<h1>Piquant</h1>
+
+{% include 'communication/__i_newsletter_snippet.html' %}
+{% endblock content %}

@@ -6,11 +6,10 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 
 import about.urls
-import configuration.feeds
-import configuration.sitemaps
-import landing.urls
-import zine.urls
+import communication.urls
 import styleguide.urls
+import zine.urls
+from configuration import feeds, sitemaps
 
 
 SITE = Site.objects.get_current()
@@ -19,20 +18,23 @@ admin.site.site_header = f'{SITE.name} Admin'
 admin.site.site_title = SITE.name
 
 full_sitemap = {
-    'issues': configuration.sitemaps.IssueSitemap,
-    'articles': configuration.sitemaps.ArticleSitemap,
-    'miscellaneous': configuration.sitemaps.MiscellaneousPageSitemap([
-        'landing:landing',
+    'issues': sitemaps.IssueSitemap,
+    'articles': sitemaps.ArticleSitemap,
+    'miscellaneous': sitemaps.MiscellaneousPageSitemap([
+        'zine:home',
+        'communication:newsletter',
     ])
 }
 
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     path('sitemap.xml', sitemap, {'sitemaps': full_sitemap}, name='sitemap'),
-    path('feed/', configuration.feeds.IssueFeed(), name='feed'),
+    path('feed/', feeds.IssueFeed(), name='feed'),
     path('about/', include(about.urls)),
     path('styleguide/', include(styleguide.urls)),
-    path('', include(landing.urls)),
+    path('service-worker.js', TemplateView.as_view(template_name='service-worker.js', content_type='application/javascript'), name='service_worker'),
+    path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain'), name='robots'),
+    path('', include(communication.urls)),
     path('', include(zine.urls)),
 ]
 

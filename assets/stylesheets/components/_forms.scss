@@ -7,9 +7,17 @@
         font-family: $body-font-family;
         padding: 0 $input-horizontal-padding;
         border: $input-border-width solid $input-border-color;
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    select {
+        margin-top: 0;
+        margin-bottom: 1.5rem;
     }
 
     label {
+        display: block;
         font-weight: bold;
         margin-right: $base-padding;
     }
@@ -29,6 +37,9 @@
 
     input[type="radio"],
     input[type="checkbox"] {
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+
         &:hover {
             cursor: pointer;
         }
@@ -43,6 +54,7 @@
 
         + label {
             font-weight: normal;
+            display: inline;
         }
     }
 }

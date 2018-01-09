@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'markupfield',
     'ordered_model',
     'storages',
-    'landing',
+    'communication',
     'zine',
     'about',
     'styleguide',
@@ -80,7 +80,12 @@ TEMPLATES = [
     },
 ]
 
-TEMPLATE_VISIBLE_SETTINGS = ['ENVIRONMENT', 'FACEBOOK_APP_ID', 'DEFAULT_PAGE_DESCRIPTION']
+TEMPLATE_VISIBLE_SETTINGS = [
+    'ENVIRONMENT',
+    'FACEBOOK_APP_ID',
+    'DEFAULT_PAGE_DESCRIPTION',
+    'IS_PRODUCTION'
+]
 
 WSGI_APPLICATION = 'configuration.wsgi.application'
 
