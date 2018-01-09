@@ -11,32 +11,5 @@
 {% block content %}
 <h1>Piquant</h1>
 
-<p>
-    {% blocktrans %}
-    <span class="piquant">Piquant</span> is a publication dedicated to uncovering culture, history, traditions, and
-    secrets about the food we eat every day. Join us in the pursuit to understand the elemental foundations of food and
-    how they come together into something bigger than themselves.
-    {% endblocktrans %}
-</p>
-
-<div id="mc_embed_signup">
-<form
-    action="https://piquantmag.us17.list-manage.com/subscribe/post?u=523fa74ae2f53d62e9183bc43&amp;id=fdd3cf1a41"
-    method="post"
-    id="mc-embedded-subscribe-form"
-    name="mc-embedded-subscribe-form"
-    class="validate"
-    target="_blank"
-    novalidate
->
-    <div id="mc_embed_signup_scroll" class="text-center">
-        <label class="hidden" for="mce-EMAIL">{% trans 'email address' %}</label>
-        <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-        <div style="position: absolute; left: -5000px;" aria-hidden="true">
-            <input type="text" name="b_523fa74ae2f53d62e9183bc43_fdd3cf1a41" tabindex="-1" value="">
-        </div>
-        <input type="submit" value="{% trans 'Get status updates' %}" name="subscribe" id="mc-embedded-subscribe" class="button">
-    </div>
-</form>
-</div>
+{% include 'communication/__i_newsletter_snippet.html' %}
 {% endblock content %}

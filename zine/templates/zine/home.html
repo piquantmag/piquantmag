@@ -19,5 +19,7 @@
             </p>
         </section>
         {% include 'zine/issue/__i_article_set.html' with issue=latest_issue %}
+    {% else %}
+        {% include 'communication/__i_newsletter_snippet.html' %}
     {% endif %}
 {% endblock content %}
