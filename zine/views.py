@@ -1,6 +1,5 @@
 import logging
 
-from django.utils import timezone
 from django.views.generic import DetailView, TemplateView
 
 from zine.models import Article, Issue
@@ -14,10 +13,8 @@ class ArticleView(DetailView):
     slug_url_kwarg = 'article_slug'
     template_name = 'zine/article/view.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        context['issue'] = self.object.issue
-        return context
+    def get_queryset(self):
+        return Article.published_articles.select_related('issue')
 
 
 class IssueView(DetailView):
@@ -26,7 +23,7 @@ class IssueView(DetailView):
     template_name = 'zine/issue/view.html'
 
     def get_queryset(self):
-        return super().get_queryset().filter(publication_date__lte=timezone.now())
+        return Issue.published_issues.prefetch_related('article_set')
 
 
 class HomeView(TemplateView):
@@ -34,10 +31,19 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        try:
-            context['latest_issue'] = Issue.objects.latest('publication_date')
-        except Issue.DoesNotExist:
-            LOGGER.warning('There are no issues yet!')
+
+        latest_issue = (
+            Issue
+            .published_issues
+            .prefetch_related('article_set')
+            .first()
+        )
+
+        if not latest_issue:
+            LOGGER.warning('There are no published issues. Serving the newsletter signup fallback.')
+
+        context['latest_issue'] = latest_issue
+
         return context
 
 
