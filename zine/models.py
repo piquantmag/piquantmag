@@ -19,6 +19,11 @@ class Author(models.Model):
         return self.display_name
 
 
+class PublishedIssueManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(publication_date__lte=timezone.now())
+
+
 class Issue(ordered_model.models.OrderedModel):
     title = models.CharField(max_length=255)
     slug = models.SlugField()
@@ -26,6 +31,9 @@ class Issue(ordered_model.models.OrderedModel):
     synopsis = models.TextField()
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
+
+    issues = models.Manager()
+    published_issues = PublishedIssueManager()
 
     class Meta(ordered_model.models.OrderedModel.Meta):
         ordering = ['order']
@@ -40,11 +48,16 @@ class Issue(ordered_model.models.OrderedModel):
 
     @property
     def issue_number(self):
-        all_issues = [issue for issue in Issue.objects.all()]
+        all_issues = [issue for issue in Issue.issues.all()]
         return all_issues.index(self) + 1
 
     def __str__(self):
         return _('Issue') + f' {self.issue_number}: {self.title}'
+
+
+class PublishedArticleManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(issue__publication_date__lte=timezone.now())
 
 
 class Article(ordered_model.models.OrderedModel):
@@ -57,6 +70,9 @@ class Article(ordered_model.models.OrderedModel):
     order_with_respect_to = 'issue'
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
+
+    articles = models.Manager()
+    published_articles = PublishedArticleManager()
 
     class Meta(ordered_model.models.OrderedModel.Meta):
         ordering = ['order']

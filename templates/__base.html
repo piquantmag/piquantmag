@@ -42,7 +42,7 @@
         {% block extra_meta_tags %}{% endblock %}
 
         <title>{% block page_title %}Piquant{% endblock %}</title>
-        <meta name="description" content="{% block page_description %}{% firstof page_description DEFAULT_PAGE_DESCRIPTION %}{% endblock %}">
+        <meta name="description" content="{% block page_description %}{{ DEFAULT_PAGE_DESCRIPTION }}{% endblock %}">
 
         <link href="https://fonts.googleapis.com/css?family=IM+Fell+English+SC|Spectral:300,700" rel="stylesheet">
         {% render_bundle 'main' 'css' %}

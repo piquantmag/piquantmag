@@ -2,10 +2,10 @@
 
 {% load i18n %}
 
-{% block page_title %}{{ article }} | {{ issue }} | {{ block.super }}{% endblock %}
+{% block page_title %}{{ article }} | {{ article.issue }} | {{ block.super }}{% endblock %}
 {% block page_description %}{{ article.synopsis }}{% endblock %}
 
-{% block og_title %}{{ article }} | {{ issue }} | {{ block.super }}{% endblock %}
+{% block og_title %}{{ article }} | {{ article.issue }} | {{ block.super }}{% endblock %}
 {% block og_description %}{{ article.description }}{% endblock %}
 {% block og_type %}article{% endblock %}
 
@@ -25,7 +25,7 @@
             By {{ article.authors.all|join:", " }}
         </span>
         <span class="text-center">
-            {% trans 'From the issue' %} <a href="{% url 'zine:issue' issue.slug %}" class="piquant underline">{{ issue.title }}</a>
+            {% trans 'From the issue' %} <a href="{% url 'zine:issue' article.issue.slug %}" class="piquant underline">{{ article.issue.title }}</a>
         </span>
         {% if user.is_staff %}
         <div class="text-center">

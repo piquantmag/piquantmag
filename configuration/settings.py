@@ -1,8 +1,11 @@
 import os
-
-from django.http import Http404
+import logging.config
 
 import markdown
+
+from django.http import Http404
+from django.utils.log import DEFAULT_LOGGING
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -18,7 +21,7 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 SITE_ID = 1
 SITE_NAME = 'Piquant'
 
-INSTALLED_APPS = [
+BUILTIN_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -27,15 +30,23 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'django.contrib.sites',
+]
+
+THIRD_PARTY_APPS = [
     'webpack_loader',
     'markupfield',
     'ordered_model',
     'storages',
+]
+
+MY_APPS = [
     'communication',
     'zine',
     'about',
     'styleguide',
 ]
+
+INSTALLED_APPS = BUILTIN_APPS + THIRD_PARTY_APPS + MY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -162,3 +173,38 @@ WEBPACK_LOADER = {
 MARKUP_FIELD_TYPES = (
     ('markdown', markdown.markdown),
 )
+
+LOGGING_CONFIG = None
+LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
+LOGGERS = {
+    '': {
+        'level': 'WARNING',
+        'handlers': ['console'],
+    },
+    'django.server': DEFAULT_LOGGING['loggers']['django.server']
+}
+LOGGERS.update({
+    app: {
+        'level': LOG_LEVEL,
+        'handlers': ['console'],
+        'propagate': False,
+    } for app in MY_APPS
+})
+logging.config.dictConfig({
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'console': {
+            'format': '%(asctime)s | %(levelname)-8s | %(name)s | %(message)s',
+        },
+        'django.server': DEFAULT_LOGGING['formatters']['django.server']
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'console',
+        },
+        'django.server': DEFAULT_LOGGING['handlers']['django.server']
+    },
+    'loggers': LOGGERS,
+})
