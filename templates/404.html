@@ -1,14 +1,19 @@
 {% extends '__error_page_base.html' %}
 
+{% load i18n %}
+
 {% block error_page_title %}Page Not Found{% endblock %}
 
 {% block extra_meta_tags %}
 <meta name="robots" content="noindex">
 {% endblock extra_meta_tags %}
 
-{% block error_title %}Not Found{% endblock %}
+{% block error_title %}{% trans 'Not Found' %}{% endblock %}
+
 {% block error_message %}
-The page you are looking for is absolutely nowhere to be found.
-Sorry about that! You can <a href="{% url 'zine:home' %}">go home</a>
-and try finding your way again.
+    {% blocktrans %}
+    The page you are looking for is absolutely nowhere to be found.
+    Sorry about that! You can <a href="{% url 'zine:home' %}">go home</a>
+    and try finding your way again.
+    {% endblocktrans %}
 {% endblock error_message %}

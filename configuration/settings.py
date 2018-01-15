@@ -5,6 +5,7 @@ import markdown
 
 from django.http import Http404
 from django.utils.log import DEFAULT_LOGGING
+from django.utils.translation import gettext_lazy as _
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -67,6 +68,7 @@ ROLLBAR = {
         (Http404, 'ignored'),
     ],
     'handler': 'blocking',
+    'patch_debugview': False,
 }
 
 ROOT_URLCONF = 'configuration.urls'
@@ -153,7 +155,7 @@ AWS_S3_CUSTOM_DOMAIN = f'static-{ENVIRONMENT}.piquantmag.com'
 STATIC_URL = '/static/' if DEBUG else f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 ADMIN_URL = os.getenv('ADMIN_URL', 'admin/')
 
-DEFAULT_PAGE_DESCRIPTION = (
+DEFAULT_PAGE_DESCRIPTION = _(
     'A publication dedicated to uncovering culture, history, traditions, and secrets about the food we eat every day.'
 )
 
