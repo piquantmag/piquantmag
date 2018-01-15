@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.translation import gettext as _
 
 import ordered_model.admin
 
@@ -8,12 +9,12 @@ from zine import models
 @admin.register(models.Article)
 class ArticleAdmin(ordered_model.admin.OrderedModelAdmin):
     fieldsets = (
-        ('Issue Information', {
+        (_('Issue Information'), {
             'fields': [
                 'issue',
             ]
         }),
-        ('Article Information', {
+        (_('Article Information'), {
             'fields': [
                 ('title', 'slug',),
                 'authors',
@@ -21,7 +22,7 @@ class ArticleAdmin(ordered_model.admin.OrderedModelAdmin):
                 'synopsis',
             ]
         }),
-        ('History', {
+        (_('History'), {
             'fields': [
                 ('created_time', 'updated_time',),
             ]

@@ -1,5 +1,6 @@
 import logging
 
+from django.utils.translation import gettext as _
 from django.views.generic import DetailView, TemplateView
 
 from zine.models import Article, Issue
@@ -40,7 +41,7 @@ class HomeView(TemplateView):
         )
 
         if not latest_issue:
-            LOGGER.warning('There are no published issues. Serving the newsletter signup fallback.')
+            LOGGER.warning(_('There are no published issues. Serving the newsletter signup fallback.'))
 
         context['latest_issue'] = latest_issue
 

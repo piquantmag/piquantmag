@@ -1,9 +1,14 @@
 {% extends '__error_page_base.html' %}
 
+{% load i18n %}
+
 {% block error_page_title %}Error{% endblock %}
 
-{% block error_title %}Error{% endblock %}
+{% block error_title %}{% trans 'Error' %}{% endblock %}
+
 {% block error_message %}
-Something went wrong. Try again later or <a href="{% url 'communication:newsletter' %}">go back home</a> for now!
-If you continue experiencing issues, please <a href="mailto:support@piquantmag.com">let us know</a>.
+    {% blocktrans %}
+    Something went wrong. Try again later or <a href="{% url 'communication:newsletter' %}">go back home</a> for now!
+    If you continue experiencing issues, please <a href="mailto:support@piquantmag.com">let us know</a>.
+    {% endblocktrans %}
 {% endblock error_message %}
