@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.contrib.syndication.views import Feed
-from django.utils import timezone
 
 from zine.models import Issue
 
@@ -16,7 +15,7 @@ class IssueFeed(Feed):
     description_template = 'feeds/issue.html'
 
     def items(self):
-        return Issue.objects.filter(publication_date__lte=timezone.now())
+        return Issue.published_issues.all()
 
     def item_title(self, item):
         return f'{item} | Piquant'
