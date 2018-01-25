@@ -21,6 +21,7 @@ django-webpack-loader = "*"
 django-markupfield = "*"
 django-ordered-model = "*"
 markdown = "*"
+pillow = "*"
 
 
 [requires]

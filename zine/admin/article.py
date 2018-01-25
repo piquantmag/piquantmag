@@ -6,6 +6,42 @@ import ordered_model.admin
 from zine import models
 
 
+@admin.register(models.Component)
+class ComponentAdmin(ordered_model.admin.OrderedModelAdmin):
+    fieldsets = (
+        ('Article', {
+            'fields': [
+                'article',
+            ]
+        }),
+        ('Component Type', {
+            'fields': [
+                'type',
+            ]
+        }),
+        ('Body Component', {
+            'fields': [
+                'body',
+            ]
+        }),
+        ('Image Component', {
+            'fields': [
+                'image',
+                'image_alt_text_override',
+            ]
+        }),
+        ('Pull Quote Component', {
+            'fields': [
+                'quote',
+            ]
+        })
+    )
+
+    list_display = ('__str__', 'type', 'article', 'move_up_down_links',)
+    readonly_fields = ('move_up_down_links',)
+    raw_id_fields = ('image',)
+
+
 @admin.register(models.Article)
 class ArticleAdmin(ordered_model.admin.OrderedModelAdmin):
     fieldsets = (
@@ -17,9 +53,9 @@ class ArticleAdmin(ordered_model.admin.OrderedModelAdmin):
         (_('Article Information'), {
             'fields': [
                 ('title', 'slug',),
-                'authors',
-                'body',
                 'synopsis',
+                'authors',
+                'cover_image',
             ]
         }),
         (_('History'), {
@@ -31,7 +67,6 @@ class ArticleAdmin(ordered_model.admin.OrderedModelAdmin):
 
     search_fields = [
         'title',
-        'body',
     ]
 
     prepopulated_fields = {'slug': ('title',)}
@@ -43,4 +78,13 @@ class ArticleAdmin(ordered_model.admin.OrderedModelAdmin):
     filter_horizontal = ('authors',)
     autocomplete_fields = ('issue',)
     readonly_fields = ('created_time', 'updated_time',)
+    raw_id_fields = ('cover_image',)
     save_on_top = True
+
+
+@admin.register(models.Image)
+class ImageAdmin(admin.ModelAdmin):
+    fields = ('admin_thumbnail', 'image', 'alt_text', 'height', 'width',)
+    list_display = ('admin_thumbnail', 'alt_text', 'height', 'width',)
+    list_editable = ('alt_text',)
+    readonly_fields = ('admin_thumbnail', 'height', 'width',)

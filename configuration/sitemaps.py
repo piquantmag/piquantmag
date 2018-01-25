@@ -10,7 +10,7 @@ class IssueSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return Issue.objects.filter(publication_date__lte=timezone.now())
+        return Issue.published_issues.all()
 
     def lastmod(self, issue):
         return issue.updated_time
@@ -21,7 +21,7 @@ class ArticleSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return Article.objects.filter(issue__publication_date__lte=timezone.now())
+        return Article.published_articles.all()
 
     def lastmod(self, article):
         return article.updated_time

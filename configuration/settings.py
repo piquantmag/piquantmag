@@ -130,13 +130,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'America/Detroit'
+TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
-if IS_PRODUCTION or IS_STAGING:
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 ASSETS_DIR = os.path.join(BASE_DIR, 'assets')
 
@@ -144,15 +141,27 @@ STATICFILES_DIRS = [
     ASSETS_DIR,
 ]
 
+if IS_PRODUCTION or IS_STAGING:
+    STATICFILES_STORAGE = 'configuration.storages.StaticStorage'
+    DEFAULT_FILE_STORAGE = 'configuration.storages.MediaStorage'
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 BUCKET_PREFIX = os.getenv('BUCKET_PREFIX')
-AWS_STORAGE_BUCKET_NAME = f'{BUCKET_PREFIX}-{ENVIRONMENT}'
+
+MEDIA_BUCKET_NAME = f'{BUCKET_PREFIX}-media-{ENVIRONMENT}'
+MEDIA_DOMAIN = f'media-{ENVIRONMENT}.piquantmag.com'
+MEDIA_URL = '/media/' if DEBUG else f'https://{MEDIA_DOMAIN}/'
+
+STATIC_BUCKET_NAME = f'{BUCKET_PREFIX}-static-{ENVIRONMENT}'
+STATIC_DOMAIN = f'static-{ENVIRONMENT}.piquantmag.com'
+STATIC_URL = '/static/' if DEBUG else f'https://{STATIC_DOMAIN}/'
+
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 AWS_IS_GZIPPED = True
-AWS_S3_CUSTOM_DOMAIN = f'static-{ENVIRONMENT}.piquantmag.com'
 
-STATIC_URL = '/static/' if DEBUG else f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 ADMIN_URL = os.getenv('ADMIN_URL', 'admin/')
 
 DEFAULT_PAGE_DESCRIPTION = _(
@@ -164,7 +173,7 @@ FACEBOOK_APP_ID = '1424778977620660'
 WEBPACK_LOADER = {
     'DEFAULT': {
         'CACHE': not DEBUG,
-        'BUNDLE_DIR_NAME': 'dist/',  # must end with slash
+        'BUNDLE_DIR_NAME': 'dist/',
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
         'POLL_INTERVAL': 0.1,
         'TIMEOUT': None,
@@ -210,3 +219,8 @@ logging.config.dictConfig({
     },
     'loggers': LOGGERS,
 })
+
+SECURE_SSL_REDIRECT = not DEBUG
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_HSTS_SECONDS = 31_536_000
