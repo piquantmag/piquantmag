@@ -1,5 +1,4 @@
 language: python
-cache: pip
 python:
   - "3.6"
 script:
@@ -12,6 +11,5 @@ before_script:
   - pipenv run python manage.py migrate
   - npm install
   - npm run build
-  - pipenv run python manage.py collectstatic --noinput --ignore *.sass
 notifications:
   email: false
