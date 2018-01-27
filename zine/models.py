@@ -37,7 +37,7 @@ class Issue(ordered_model.models.OrderedModel):
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
 
-    issues = models.Manager()
+    objects = models.Manager()
     published_issues = PublishedIssueManager()
 
     class Meta(ordered_model.models.OrderedModel.Meta):
@@ -53,7 +53,7 @@ class Issue(ordered_model.models.OrderedModel):
 
     @property
     def issue_number(self):
-        all_issues = [issue for issue in Issue.issues.all()]
+        all_issues = [issue for issue in Issue.objects.all()]
         return all_issues.index(self) + 1
 
     def __str__(self):
@@ -99,7 +99,7 @@ class Article(ordered_model.models.OrderedModel):
 
     order_with_respect_to = 'issue'
 
-    articles = models.Manager()
+    objects = models.Manager()
     published_articles = PublishedArticleManager()
 
     class Meta(ordered_model.models.OrderedModel.Meta):

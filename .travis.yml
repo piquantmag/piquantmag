@@ -1,0 +1,17 @@
+language: python
+cache: pip
+python:
+  - "3.6"
+script:
+  - pipenv run coverage run manage.py test --noinput && coverage report
+install:
+  - pip install pipenv
+  - pipenv install --dev
+before_script:
+  - mysql -e 'create database piquantmag;'
+  - pipenv run python manage.py migrate
+  - npm install
+  - npm run build
+  - pipenv run python manage.py collectstatic --noinput --ignore *.sass
+notifications:
+  email: false

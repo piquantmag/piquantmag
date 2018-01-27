@@ -13,9 +13,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 ENVIRONMENT = os.getenv('STAGE', 'dev')
+IS_DEVELOPMENT = ENVIRONMENT == 'dev'
 IS_STAGING = ENVIRONMENT == 'staging'
 IS_PRODUCTION = ENVIRONMENT == 'production'
-DEBUG = ENVIRONMENT == 'dev'
+IS_CI = os.getenv('CI', False) == 'true'
+DEBUG = IS_DEVELOPMENT or IS_CI
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
