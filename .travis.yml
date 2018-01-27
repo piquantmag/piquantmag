@@ -2,8 +2,6 @@ language: python
 cache: pip
 python:
   - "3.6"
-services:
-  - mysql
 script:
   - pipenv run coverage run manage.py test --noinput && coverage report
 install:

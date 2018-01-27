@@ -23,6 +23,8 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
 SITE_ID = 1
 SITE_NAME = 'Piquant'
+ADMIN_HEADER = 'Piquant Admin'
+ADMIN_TITLE = 'Piquant'
 
 BUILTIN_APPS = [
     'django.contrib.admin',
