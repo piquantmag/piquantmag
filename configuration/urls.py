@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.sites.models import Site
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
@@ -14,10 +13,8 @@ import zine.urls
 from configuration import feeds, sitemaps
 
 
-SITE = Site.objects.get_current()
-
-admin.site.site_header = f'{SITE.name} Admin'
-admin.site.site_title = SITE.name
+admin.site.site_header = settings.ADMIN_HEADER
+admin.site.site_title = settings.ADMIN_TITLE
 
 full_sitemap = {
     'issues': sitemaps.IssueSitemap,
