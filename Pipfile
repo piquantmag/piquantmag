@@ -8,6 +8,7 @@ name = "pypi"
 [dev-packages]
 
 coverage = "*"
+django-debug-toolbar = "*"
 
 
 [packages]

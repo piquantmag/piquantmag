@@ -10,12 +10,13 @@ from zine import component_renderers
 class ComponentRendererTestCase(TestCase):
     def test_base_class_is_abstract(self):
         with self.assertRaises(TypeError):
-            renderer = component_renderers.ComponentRenderer('can\'t do this')
+            component_renderers.ComponentRenderer('can\'t do this')
 
 
 class BodyComponentRendererTestCase(TestCase):
     def setUp(self):
         self.component = mock.Mock()
+        self.component.body.raw = '# foo'
         self.component.body.rendered = '<h1>foo</h1>'
         self.renderer = component_renderers.BodyComponentRenderer(self.component)
 
@@ -25,7 +26,13 @@ class BodyComponentRendererTestCase(TestCase):
     def test_admin_string(self):
         self.assertEqual(
             truncatechars(self.component.body.raw, component_renderers.ADMIN_FIELD_TRUNCATE_LENGTH),
-            self.renderer.admin_string
+            self.renderer.admin_string,
+        )
+
+    def test_string_method(self):
+        self.assertEqual(
+            self.component.body.raw,
+            str(self.renderer),
         )
 
 
@@ -47,11 +54,17 @@ class ImageComponentRendererTestCase(TestCase):
     def test_html(self):
         self.assertEqual(
             mark_safe('<img src="https://foo.com/foo.jpg" alt="very alt" />'),
-            self.renderer.html
+            self.renderer.html,
         )
 
     def test_admin_string(self):
         self.assertEqual('https://foo.com/foo.jpg: very alt', self.renderer.admin_string)
+
+    def test_string_method(self):
+        self.assertEqual(
+            self.renderer.alt_text,
+            str(self.renderer),
+        )
 
 
 class PullQuoteComponentRendererTestCase(TestCase):
@@ -66,5 +79,11 @@ class PullQuoteComponentRendererTestCase(TestCase):
     def test_admin_string(self):
         self.assertEqual(
             truncatechars(self.component.quote, component_renderers.ADMIN_FIELD_TRUNCATE_LENGTH),
-            self.renderer.admin_string
+            self.renderer.admin_string,
+        )
+
+    def test_string_method(self):
+        self.assertEqual(
+            self.component.quote,
+            str(self.renderer),
         )

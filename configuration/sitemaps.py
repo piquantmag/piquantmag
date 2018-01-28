@@ -12,7 +12,8 @@ class IssueSitemap(Sitemap):
     def items(self):
         return Issue.published_issues.all()
 
-    def lastmod(self, issue):
+    @staticmethod
+    def lastmod(issue):
         return issue.updated_time
 
 
@@ -23,7 +24,8 @@ class ArticleSitemap(Sitemap):
     def items(self):
         return Article.published_articles.all()
 
-    def lastmod(self, article):
+    @staticmethod
+    def lastmod(article):
         return article.updated_time
 
 
@@ -38,7 +40,7 @@ class MiscellaneousPageSitemap(Sitemap):
         return self.names
 
     @staticmethod
-    def lastmod(obj):
+    def lastmod(page):
         return timezone.now()
 
     def location(self, obj):

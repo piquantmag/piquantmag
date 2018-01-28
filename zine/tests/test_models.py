@@ -1,8 +1,8 @@
 from datetime import timedelta
 
 from django.test import TestCase
+from django.urls import reverse
 from django.utils import timezone
-from django.utils.translation import gettext as _
 
 from zine import models
 
@@ -34,7 +34,7 @@ class PublishedIssueManagerTest(TestCase):
         self.assertNotIn(unpublished_issue, published_issues)
 
 
-class IssueManagerTestCase(TestCase):
+class IssueTestCase(TestCase):
     def test_is_published_when_published(self):
         published_issue = models.Issue.objects.create(
             title='Published Issue',
@@ -55,23 +55,18 @@ class IssueManagerTestCase(TestCase):
 
         self.assertFalse(unpublished_issue.is_published())
 
-    def test_issue_number(self):
-        first_issue = models.Issue.objects.create(
-            title='First Issue',
-            slug='first-issue',
+    def test_get_absolute_url(self):
+        issue = models.Issue.objects.create(
+            title='Some Issue',
+            slug='some-issue',
             publication_date=timezone.now(),
-            synopsis='The first issue',
+            synopsis='Some issue',
         )
 
-        second_issue = models.Issue.objects.create(
-            title='Second Issue',
-            slug='second-issue',
-            publication_date=timezone.now(),
-            synopsis='The second issue',
+        self.assertEqual(
+            reverse('zine:issue', kwargs={'issue_slug': 'some-issue'}),
+            issue.get_absolute_url(),
         )
-
-        self.assertEqual(1, first_issue.issue_number)
-        self.assertEqual(2, second_issue.issue_number)
 
     def test_string_method(self):
         issue = models.Issue.objects.create(
@@ -81,4 +76,4 @@ class IssueManagerTestCase(TestCase):
             synopsis='An issue',
         )
 
-        self.assertEqual(_('Issue') + ' 1: An Issue Title', str(issue))
+        self.assertEqual('An Issue Title', str(issue))

@@ -15,7 +15,12 @@ class ArticleView(DetailView):
     template_name = 'zine/article/view.html'
 
     def get_queryset(self):
-        return Article.published_articles.select_related('issue')
+        return (
+            Article
+            .published_articles
+            .select_related('issue')
+            .prefetch_related('authors')
+        )
 
 
 class IssueView(DetailView):
@@ -37,6 +42,7 @@ class HomeView(TemplateView):
             Issue
             .published_issues
             .prefetch_related('article_set')
+            .prefetch_related('article_set__cover_image')
             .first()
         )
 
