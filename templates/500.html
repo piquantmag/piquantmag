@@ -7,8 +7,9 @@
 {% block error_title %}{% trans 'Error' %}{% endblock %}
 
 {% block error_message %}
+    {% url 'communication:newsletter' as newsletter_url %}
     {% blocktrans %}
-    Something went wrong. Try again later or <a href="{% url 'communication:newsletter' %}">go back home</a> for now!
+    Something went wrong. Try again later or <a href="{{ newsletter_url }}">go back home</a> for now!
     If you continue experiencing issues, please <a href="mailto:support@piquantmag.com">let us know</a>.
     {% endblocktrans %}
 {% endblock error_message %}

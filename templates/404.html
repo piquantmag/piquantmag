@@ -11,9 +11,10 @@
 {% block error_title %}{% trans 'Not Found' %}{% endblock %}
 
 {% block error_message %}
+    {% url 'zine:home' as home_url %}
     {% blocktrans %}
     The page you are looking for is absolutely nowhere to be found.
-    Sorry about that! You can <a href="{% url 'zine:home' %}">go home</a>
+    Sorry about that! You can <a href="{{ home_url }}">go home</a>
     and try finding your way again.
     {% endblocktrans %}
 {% endblock error_message %}
