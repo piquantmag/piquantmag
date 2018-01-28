@@ -14,16 +14,16 @@ class ComponentRenderer(metaclass=ABCMeta):
     @property
     @abstractmethod
     def html(self):
-        pass
+        """The HTML markup used to render the component on a page"""
 
     @property
     @abstractmethod
     def admin_string(self):
-        pass
+        """The string to use in the Django admin list display"""
 
     @abstractmethod
     def __str__(self):
-        pass
+        """The representation of this component when formatted into strings"""
 
 
 class BodyComponentRenderer(ComponentRenderer):

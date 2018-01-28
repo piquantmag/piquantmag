@@ -4,7 +4,6 @@ from django.dispatch import receiver
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.safestring import mark_safe
-from django.utils.translation import gettext_lazy as _
 
 import ordered_model.models
 import markupfield.fields
@@ -51,18 +50,8 @@ class Issue(ordered_model.models.OrderedModel):
     def get_absolute_url(self):
         return reverse('zine:issue', kwargs={'issue_slug': self.slug})
 
-    @property
-    def issue_number(self):
-        all_issues = [issue for issue in Issue.objects.all()]
-        return all_issues.index(self) + 1
-
     def __str__(self):
-        return _('Issue') + f' {self.issue_number}: {self.title}'
-
-
-class PublishedArticleManager(models.Manager):
-    def get_queryset(self):
-        return super().get_queryset().filter(issue__publication_date__lte=timezone.now())
+        return self.title
 
 
 class Image(models.Model):
@@ -87,12 +76,17 @@ def photograph_delete(sender, instance, **kwargs):
     instance.image.delete(False)
 
 
+class PublishedArticleManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(issue__publication_date__lte=timezone.now())
+
+
 class Article(ordered_model.models.OrderedModel):
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
     issue = models.ForeignKey(Issue, blank=True, null=True, on_delete=models.SET_NULL)
     synopsis = models.TextField(blank=True, null=True)
-    authors = models.ManyToManyField(Author)
+    authors = models.ManyToManyField(Author, blank=True)
     cover_image = models.ForeignKey(Image, blank=True, null=True, on_delete=models.SET_NULL)
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)

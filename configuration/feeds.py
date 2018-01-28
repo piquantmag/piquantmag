@@ -10,7 +10,8 @@ class IssueFeed(Feed):
     description = settings.DEFAULT_PAGE_DESCRIPTION
     description_template = 'feeds/issue.html'
 
-    def items(self):
+    @staticmethod
+    def items():
         return Issue.published_issues.all()
 
     def item_title(self, item):
