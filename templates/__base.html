@@ -47,6 +47,8 @@
         <link href="https://fonts.googleapis.com/css?family=IM+Fell+English+SC|Spectral:300,700" rel="stylesheet">
         {% render_bundle 'main' 'css' %}
         {% include '__i_favicons.html' %}
+
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     </head>
     <body>
         <nav>
@@ -63,11 +65,25 @@
                 <li><a href="{% url 'communication:newsletter' %}">{% trans 'Newsletter' %}</a></li>
             </ul>
             <ul>
-                <li><a href="https://www.facebook.com/piquantmagazine" target="_blank" rel="noopener">Facebook</a></li>
-                <li><a href="https://www.instagram.com/piquantmagazine" target="_blank" rel="noopener">Instagram</a></li>
-                <li><a href="https://www.twitter.com/piquantmag" target="_blank" rel="noopener">Twitter</a></li>
-            </ul>
-            <ul>
+                <li>
+                    <ul class="inline-list">
+                        <li>
+                            <a href="https://www.facebook.com/piquantmagazine" target="_blank" rel="noopener">
+                                <i class="fab fa-facebook" title="Facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/piquantmagazine" target="_blank" rel="noopener">
+                                <i class="fab fa-instagram" title="Instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.twitter.com/piquantmag" target="_blank" rel="noopener">
+                                <i class="fab fa-twitter" title="Twitter"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li>&copy; {% now "Y" %} Piquant. {% trans 'All Rights Reserved' %}.</li>
             </ul>
         </footer>

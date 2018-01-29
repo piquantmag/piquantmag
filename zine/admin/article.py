@@ -28,6 +28,7 @@ class ComponentAdmin(ordered_model.admin.OrderedModelAdmin):
             'fields': [
                 'image',
                 'image_alt_text_override',
+                'image_caption',
             ]
         }),
         ('Pull Quote Component', {

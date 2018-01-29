@@ -42,6 +42,7 @@ class ImageComponentRendererTestCase(TestCase):
         self.component.image.alt_text = 'very alt'
         self.component.image.image.url = 'https://foo.com/foo.jpg'
         self.component.image_alt_text_override = None
+        self.component.image_caption = None
         self.renderer = component_renderers.ImageComponentRenderer(self.component)
 
     def test_alt_text_when_no_override(self):
@@ -51,9 +52,21 @@ class ImageComponentRendererTestCase(TestCase):
         self.component.image_alt_text_override = 'new alt'
         self.assertEqual('new alt', self.renderer.alt_text)
 
-    def test_html(self):
+    def test_html_without_caption(self):
+        self.component.image_caption = mock.Mock()
+        self.component.image_caption.raw = None
         self.assertEqual(
             mark_safe('<img src="https://foo.com/foo.jpg" alt="very alt" />'),
+            self.renderer.html,
+        )
+
+    def test_html_with_caption(self):
+        self.component.image_caption = mock.Mock()
+        self.component.image_caption.rendered = '<p>foobar</p>'
+        self.assertEqual(
+            mark_safe(
+                '<img src="https://foo.com/foo.jpg" alt="very alt" /><div class="img-caption"><p>foobar</p></div>'
+            ),
             self.renderer.html,
         )
 

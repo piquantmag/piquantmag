@@ -9,6 +9,7 @@
 @import 'components/buttons';
 @import 'components/forms';
 @import 'components/cards';
+@import 'components/images';
 
 @include utils;
 @include typography;
@@ -20,3 +21,4 @@
 @include buttons;
 @include forms;
 @include cards;
+@include images;

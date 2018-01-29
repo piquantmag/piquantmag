@@ -1,5 +1,5 @@
 @mixin utils {
-    .hidden {
+    .sr-only {
         position: absolute !important;
         left: -10000px;
         top: auto;
