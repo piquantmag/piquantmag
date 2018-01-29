@@ -132,6 +132,7 @@ class Component(ordered_model.models.OrderedModel):
     quote = models.CharField(max_length=100, blank=True, null=True)
     image = models.ForeignKey(Image, blank=True, null=True, on_delete=models.CASCADE)
     image_alt_text_override = models.CharField(max_length=100, blank=True, null=True)
+    image_caption = markupfield.fields.MarkupField(markup_type='markdown', blank=True, null=True)
 
     order_with_respect_to = ('article',)
 

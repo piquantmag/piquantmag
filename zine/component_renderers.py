@@ -55,7 +55,11 @@ class PullQuoteComponentRenderer(ComponentRenderer):
 class ImageComponentRenderer(ComponentRenderer):
     @property
     def html(self):
-        return mark_safe(f'<img src="{self.component.image.image.url}" alt="{self.alt_text}" />')
+        markup = f'<img src="{self.component.image.image.url}" alt="{self.alt_text}" />'
+        if self.component.image_caption.raw:
+            markup += f'<div class="img-caption">{self.component.image_caption.rendered}</div>'
+
+        return mark_safe(markup)
 
     @property
     def admin_string(self):
