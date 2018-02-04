@@ -7,10 +7,26 @@ from django.utils.safestring import mark_safe
 from zine import component_renderers
 
 
+class MockComponentRenderer(component_renderers.ComponentRenderer):
+    def html(self):
+        return 'some html'
+
+    def admin_string(self):
+        return 'some admin string'
+
+    def __str__(self):
+        return 'I am a mock component!'
+
+
 class ComponentRendererTestCase(TestCase):
     def test_base_class_is_abstract(self):
         with self.assertRaises(TypeError):
             component_renderers.ComponentRenderer('can\'t do this')
+
+    def test_amphtml_returns_html_by_default(self):
+        component = mock.Mock()
+        amphtml = MockComponentRenderer(component).amphtml()
+        self.assertEqual('some html', amphtml)
 
 
 class BodyComponentRendererTestCase(TestCase):
@@ -68,6 +84,28 @@ class ImageComponentRendererTestCase(TestCase):
                 '<img src="https://foo.com/foo.jpg" alt="very alt" /><div class="img-caption"><p>foobar</p></div>'
             ),
             self.renderer.html,
+        )
+
+    def test_amphtml_without_caption(self):
+        self.component.image_caption = mock.Mock()
+        self.component.image_caption.raw = None
+        self.component.image.width = 1
+        self.component.image.height = 2
+        self.assertEqual(
+            mark_safe('<amp-img src="https://foo.com/foo.jpg" width="1" height="2" layout="responsive"></amp-img>'),
+            self.renderer.amphtml,
+        )
+
+    def test_amphtml_with_caption(self):
+        self.component.image_caption = mock.Mock()
+        self.component.image_caption.rendered = '<p>foobar</p>'
+        self.component.image.width = 1
+        self.component.image.height = 2
+        self.assertEqual(
+            mark_safe(
+                '<amp-img src="https://foo.com/foo.jpg" width="1" height="2" layout="responsive"></amp-img><div class="img-caption"><p>foobar</p></div>'
+            ),
+            self.renderer.amphtml,
         )
 
     def test_admin_string(self):

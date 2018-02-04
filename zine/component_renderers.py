@@ -17,6 +17,10 @@ class ComponentRenderer(metaclass=ABCMeta):
         """The HTML markup used to render the component on a page"""
 
     @property
+    def amphtml(self):
+        return self.html
+
+    @property
     @abstractmethod
     def admin_string(self):
         """The string to use in the Django admin list display"""
@@ -59,6 +63,13 @@ class ImageComponentRenderer(ComponentRenderer):
         if self.component.image_caption.raw:
             markup += f'<div class="img-caption">{self.component.image_caption.rendered}</div>'
 
+        return mark_safe(markup)
+
+    @property
+    def amphtml(self):
+        markup = f'<amp-img src="{self.component.image.image.url}" width="{self.component.image.width}" height="{self.component.image.height}" layout="responsive"></amp-img>'
+        if self.component.image_caption.raw:
+            markup += f'<div class="img-caption">{self.component.image_caption.rendered}</div>'
         return mark_safe(markup)
 
     @property

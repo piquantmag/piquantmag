@@ -23,6 +23,20 @@ class ArticleView(DetailView):
         )
 
 
+class AmpArticleView(DetailView):
+    model = Article
+    slug_url_kwarg = 'article_slug'
+    template_name = 'zine/article/amp.html'
+
+    def get_queryset(self):
+        return (
+            Article
+            .published_articles
+            .select_related('issue')
+            .prefetch_related('authors')
+        )
+
+
 class IssueView(DetailView):
     model = Issue
     slug_url_kwarg = 'issue_slug'
