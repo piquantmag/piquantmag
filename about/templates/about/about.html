@@ -36,7 +36,7 @@
         "@context": "http://schema.org",
         "@type": "Organization",
         "name": "Piquant",
-        "url": "{% url 'zine:home' %}",
+        "url": "https://{{ request.META.HTTP_HOST }}{% url 'zine:home' %}",
         "sameAs": [
             "https://www.facebook.com/piquantmagazine",
             "https://www.instagram.com/piquantmagazine",
