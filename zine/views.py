@@ -19,6 +19,7 @@ class ArticleView(DetailView):
             Article
             .published_articles
             .select_related('issue')
+            .select_related('cover_image')
             .prefetch_related('authors')
         )
 
@@ -33,6 +34,7 @@ class AmpArticleView(DetailView):
             Article
             .published_articles
             .select_related('issue')
+            .select_related('cover_image')
             .prefetch_related('authors')
         )
 

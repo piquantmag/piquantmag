@@ -1,6 +1,6 @@
 {% extends '__base.html' %}
-
 {% load i18n %}
+{% load static %}
 
 {% block page_title %}{% trans 'About' %} | {{ block.super }}{% endblock %}
 {% block page_description %}{% trans 'Learn more about us and our mission at Piquant' %}{% endblock %}
@@ -29,3 +29,25 @@
     {% endblocktrans %}
     </p>
 {% endblock content %}
+
+{% block ld_json %}
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "name": "Piquant",
+        "url": "{% url 'zine:home' %}",
+        "sameAs": [
+            "https://www.facebook.com/piquantmagazine",
+            "https://www.instagram.com/piquantmagazine",
+            "https://www.twitter.com/piquantmag"
+        ],
+        "logo": {
+            "@type": "ImageObject",
+            "url": "{% static 'images/piquant-amp.png' %},
+            "width": 200,
+            "height": 60
+        }
+    }
+    </script>
+{% endblock ld_json %}
