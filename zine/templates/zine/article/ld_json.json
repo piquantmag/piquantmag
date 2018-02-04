@@ -1,0 +1,31 @@
+{% load static %}
+
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "{{ article.title }}",
+    "description": "{{ article.synopsis }}",
+    {% if article.cover_image %}
+    "image": [
+        "{{ article.cover_image.image.url }}"
+    ],
+    {% endif %}
+    "datePublished": "{{ article.issue.publication_date|date:'c' }}",
+    "dateModified": "{{ article.updated_time|date:'c' }},
+    {% if article.authors.first %}
+    "author": {
+        "@type": "Person",
+        "name": "{{ article.authors.first.display_name }}"
+    },
+    {% endif %}
+    "publisher": {
+        "@type": "Organization",
+        "name": "Piquant",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "{% static 'images/piquant-amp.png' %}",
+            "height": "60",
+            "width": "200"
+        }
+    }
+}

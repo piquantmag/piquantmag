@@ -1,0 +1,32 @@
+{% load i18n %}
+
+<footer>
+    <ul>
+        <li><a href="{% url 'about:about' %}">{% trans 'About' %}</a></li>
+        <li><a href="{% url 'communication:newsletter' %}">{% trans 'Newsletter' %}</a></li>
+    </ul>
+    <ul>
+        {% if not exclude_social_links %}
+        <li>
+            <ul class="inline-list">
+                <li>
+                    <a href="https://www.facebook.com/piquantmagazine" target="_blank" rel="noopener">
+                        <i class="fab fa-facebook" title="Facebook"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/piquantmagazine" target="_blank" rel="noopener">
+                        <i class="fab fa-instagram" title="Instagram"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.twitter.com/piquantmag" target="_blank" rel="noopener">
+                        <i class="fab fa-twitter" title="Twitter"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        {% endif %}
+        <li>&copy; {% now "Y" %} Piquant. {% trans 'All Rights Reserved' %}.</li>
+    </ul>
+</footer>

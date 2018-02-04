@@ -1,0 +1,26 @@
+{% extends '__base_amp.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block canonical %}{% url 'zine:article' issue_slug=article.issue.slug article_slug=article.slug %}{% endblock %}
+
+{% block page_title %}{{ article.title }} | {{ block.super }}{% endblock %}
+
+{% block ld_json %}
+    {% include 'zine/article/ld_json.json' %}
+{% endblock %}
+
+{% block content %}
+    <header>
+        <h1>{{ article }}</h1>
+        <span class="text-center">
+            By {{ article.authors.all|join:", " }}
+        </span>
+        <span class="text-center">
+            {% trans 'From the issue' %} <a href="{% url 'zine:issue' article.issue.slug %}" class="piquant underline">{{ article.issue.title }}</a>
+        </span>
+    </header>
+    <article>
+    {{ article.amphtml }}
+    </article>
+{% endblock content %}

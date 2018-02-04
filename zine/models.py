@@ -117,6 +117,13 @@ class Article(ordered_model.models.OrderedModel):
             final_html += factories.ComponentRendererFactory(component).html
         return mark_safe(final_html)
 
+    @property
+    def amphtml(self):
+        final_html = ''
+        for component in self.component_set.all():
+            final_html += factories.ComponentRendererFactory(component).amphtml
+        return mark_safe(final_html)
+
 
 COMPONENT_TYPE_CHOICES = [
     ('PullQuoteComponentRenderer', 'PullQuoteComponentRenderer'),
