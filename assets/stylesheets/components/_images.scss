@@ -3,11 +3,12 @@
 @mixin images {
     img {
         max-width: 100%;
-        margin-top: 3rem;
+        margin: 3rem auto;
     }
 
     .img-caption {
-        margin-top: 0;
+        margin: -2rem 0 3rem;
+        @extend .text-center;
 
         p {
             font-size: $image-caption-font-size;

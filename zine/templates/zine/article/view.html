@@ -1,6 +1,7 @@
 {% extends '__base.html' %}
 
 {% load i18n %}
+{% load static %}
 
 {% block page_title %}{{ article }} | {{ article.issue }} | {{ block.super }}{% endblock %}
 {% block page_description %}{{ article.synopsis }}{% endblock %}
@@ -42,6 +43,28 @@
 
 {% block ld_json %}
     <script type="application/ld+json">
-        {% include 'zine/article/ld_json.json' %}
+        {
+            "@context": "http://schema.org",
+            "@type": "Article",
+            "headline": "{{ article.title }}",
+            "description": "{{ article.synopsis }}",
+            {% if article.cover_image %}
+            "image": [
+                "{{ article.cover_image.image.url }}"
+            ],
+            {% endif %}
+            "datePublished": "{{ article.issue.publication_date|date:'c' }}",
+            "dateModified": "{{ article.updated_time|date:'c' }},
+            {% if article.authors.0 %}
+            "author": {
+                "@type": "Person",
+                "name": "{{ article.authors.0.display_name }}"
+            },
+            {% endif %}
+            "publisher": {
+                "@type": "Organization",
+                "@id": "{% url 'about:about' %}"
+            }
+        }
     </script>
 {% endblock ld_json %}
