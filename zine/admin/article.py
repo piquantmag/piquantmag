@@ -89,3 +89,10 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = ('admin_thumbnail', 'alt_text', 'height', 'width',)
     list_editable = ('alt_text',)
     readonly_fields = ('admin_thumbnail', 'height', 'width',)
+
+
+@admin.register(models.ArticlePreview)
+class ArticlePreviewAdmin(admin.ModelAdmin):
+    fields = ('article',)
+    readonly_fields = ('uuid',)
+    list_display = ('article', 'uuid',)

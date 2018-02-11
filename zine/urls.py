@@ -9,6 +9,7 @@ urlpatterns = [
     path('', views.HomeView.as_view(), name='home'),
     path('manifest.json', views.ManifestView.as_view(), name='manifest'),
     path('browserconfig.xml', views.BrowserConfigView.as_view(), name='browserconfig'),
+    path('preview/<uuid:uuid>/', views.ArticlePreviewView.as_view(), name='article_preview'),
     path('amp/<slug:issue_slug>/', include([
         path('<slug:article_slug>/', views.AmpArticleView.as_view(), name='amp_article'),
     ])),
