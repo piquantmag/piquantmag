@@ -35,22 +35,28 @@ class PublishedIssueManagerTest(TestCase):
 
 
 class IssueTestCase(TestCase):
-    def test_is_published_when_published(self):
+    def test_is_published_when_publication_date_in_past(self):
         published_issue = models.Issue.objects.create(
             title='Published Issue',
             slug='published-issue',
             publication_date=timezone.now(),
-            synopsis='A published issue',
         )
 
         self.assertTrue(published_issue.is_published())
 
-    def test_is_published_when_not_published(self):
+    def test_is_published_when_publication_date_in_future(self):
         unpublished_issue = models.Issue.objects.create(
             title='Published Issue',
             slug='published-issue',
             publication_date=timezone.now() + timedelta(hours=1),
-            synopsis='A published issue',
+        )
+
+        self.assertFalse(unpublished_issue.is_published())
+
+    def test_is_published_when_no_publication_date(self):
+        unpublished_issue = models.Issue.objects.create(
+            title='Published Issue',
+            slug='published-issue',
         )
 
         self.assertFalse(unpublished_issue.is_published())
@@ -59,8 +65,6 @@ class IssueTestCase(TestCase):
         issue = models.Issue.objects.create(
             title='Some Issue',
             slug='some-issue',
-            publication_date=timezone.now(),
-            synopsis='Some issue',
         )
 
         self.assertEqual(
@@ -72,8 +76,71 @@ class IssueTestCase(TestCase):
         issue = models.Issue.objects.create(
             title='An Issue Title',
             slug='an-issue-title',
-            publication_date=timezone.now(),
-            synopsis='An issue',
         )
 
         self.assertEqual('An Issue Title', str(issue))
+
+
+class ArticleTestCase(TestCase):
+    def test_is_published_when_no_issue(self):
+        article = models.Article.objects.create(
+            title='Some Article',
+            slug='some-article',
+        )
+
+        self.assertFalse(article.is_published())
+
+    def test_is_published_when_issue_not_published(self):
+        issue = models.Issue.objects.create(
+            title='Some Issue',
+            slug='some-issue',
+        )
+
+        article = models.Article.objects.create(
+            title='Some Article',
+            slug='some-article',
+            issue=issue,
+        )
+
+        self.assertFalse(article.is_published())
+
+    def test_is_published_when_issue_published(self):
+        issue = models.Issue.objects.create(
+            title='Some Issue',
+            slug='some-issue',
+            publication_date=timezone.now(),
+        )
+
+        article = models.Article.objects.create(
+            title='Some Article',
+            slug='some-article',
+            issue=issue,
+        )
+
+        self.assertTrue(article.is_published())
+
+    def test_get_absolute_url(self):
+        issue = models.Issue.objects.create(
+            title='Some Issue',
+            slug='some-issue',
+            publication_date=timezone.now(),
+        )
+
+        article = models.Article.objects.create(
+            title='Some Article',
+            slug='some-article',
+            issue=issue,
+        )
+
+        self.assertEqual(
+            reverse('zine:article', kwargs={'issue_slug': issue.slug, 'article_slug': article.slug}),
+            article.get_absolute_url(),
+        )
+
+    def test_str_method(self):
+        article = models.Article.objects.create(
+            title='Some Article',
+            slug='some-article',
+        )
+
+        self.assertEqual('Some Article', str(article))

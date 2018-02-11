@@ -1,37 +1,71 @@
 import logging
 
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
 from django.utils.translation import gettext as _
-from django.views.generic import DetailView, TemplateView
+from django.views.generic import DetailView, TemplateView, View
 
-from zine.models import Article, Issue
+from zine import models
 
 
 LOGGER = logging.getLogger(__name__)
 
 
 class ArticleView(DetailView):
-    model = Article
+    model = models.Article
     slug_url_kwarg = 'article_slug'
     template_name = 'zine/article/view.html'
 
     def get_queryset(self):
+        user = self.request.user
+        if user.is_staff:
+            articles = models.Article.objects
+        else:
+            articles = models.Article.published_articles
+
         return (
-            Article
-            .published_articles
+            articles
             .select_related('issue')
             .select_related('cover_image')
             .prefetch_related('authors')
         )
 
 
+class ArticlePreviewView(View):
+    def get(self, request, *args, **kwargs):
+        preview = get_object_or_404(models.ArticlePreview, uuid=kwargs.get('uuid'))
+        article = (
+            models.Article
+            .objects
+            .select_related('issue')
+            .select_related('cover_image')
+            .prefetch_related('authors')
+            .get(articlepreview=preview)
+        )
+
+        if article.is_published():
+            return HttpResponseRedirect(
+                reverse('zine:article', kwargs={'issue_slug': article.issue.slug, 'article_slug': article.slug})
+            )
+
+        return render(
+            request,
+            template_name='zine/article/view.html',
+            context={
+                'article': article,
+            }
+        )
+
+
 class AmpArticleView(DetailView):
-    model = Article
+    model = models.Article
     slug_url_kwarg = 'article_slug'
     template_name = 'zine/article/amp.html'
 
     def get_queryset(self):
         return (
-            Article
+            models.Article
             .published_articles
             .select_related('issue')
             .select_related('cover_image')
@@ -40,12 +74,17 @@ class AmpArticleView(DetailView):
 
 
 class IssueView(DetailView):
-    model = Issue
+    model = models.Issue
     slug_url_kwarg = 'issue_slug'
     template_name = 'zine/issue/view.html'
 
     def get_queryset(self):
-        return Issue.published_issues.prefetch_related('article_set')
+        user = self.request.user
+        if user.is_staff:
+            issues = models.Issue.objects
+        else:
+            issues = models.Issue.published_issues
+        return issues.prefetch_related('article_set')
 
 
 class HomeView(TemplateView):
@@ -55,7 +94,7 @@ class HomeView(TemplateView):
         context = super().get_context_data()
 
         latest_issue = (
-            Issue
+            models.Issue
             .published_issues
             .prefetch_related('article_set')
             .prefetch_related('article_set__cover_image')

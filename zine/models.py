@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
@@ -31,8 +33,8 @@ class PublishedIssueManager(models.Manager):
 class Issue(ordered_model.models.OrderedModel):
     title = models.CharField(max_length=255)
     slug = models.SlugField()
-    publication_date = models.DateTimeField()
-    synopsis = models.TextField()
+    publication_date = models.DateTimeField(blank=True, null=True)
+    synopsis = models.TextField(blank=True, null=True)
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
 
@@ -43,7 +45,7 @@ class Issue(ordered_model.models.OrderedModel):
         ordering = ['order']
 
     def is_published(self):
-        return self.publication_date <= timezone.now()
+        return self.publication_date and self.publication_date <= timezone.now()
     is_published.boolean = True
     is_published.short_description = 'Published'
 
@@ -148,3 +150,8 @@ class Component(ordered_model.models.OrderedModel):
 
     class Meta(ordered_model.models.OrderedModel.Meta):
         ordering = ['order']
+
+
+class ArticlePreview(models.Model):
+    uuid = models.CharField(max_length=36, editable=False, unique=True, default=uuid.uuid4, verbose_name='UUID')
+    article = models.OneToOneField(Article, on_delete=models.CASCADE)
