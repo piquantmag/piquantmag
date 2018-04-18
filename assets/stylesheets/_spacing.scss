@@ -1,0 +1,27 @@
+@import 'settings';
+
+@mixin spacing {
+    $directions: (
+        ('t', '-top'),
+        ('r', '-right'),
+        ('b', '-bottom'),
+        ('l', '-left'),
+        ('a', '')
+    );
+
+    $sizes: 'n' 'xs' 's' 'm' 'l' 'xl';
+
+    @each $abbreviation, $direction in $directions {
+        @for $size-index from 0 through length($sizes) - 1 {
+            $size: nth($sizes, $size-index + 1);
+
+            .p#{$abbreviation}#{$size} {
+                padding#{$direction}: $base-spacing * $size-index !important;
+            }
+
+            .m#{$abbreviation}#{$size} {
+                margin#{$direction}: $base-spacing * $size-index !important;
+            }
+        }
+    }
+}

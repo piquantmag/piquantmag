@@ -1,7 +1,8 @@
-@import 'utils';
 @import 'settings';
+@import 'utils';
 @import 'typography';
 @import 'layout';
+@import 'spacing';
 @import 'components/links';
 @import 'components/lists';
 @import 'components/nav';
@@ -14,6 +15,7 @@
 @include utils;
 @include typography;
 @include layout;
+@include spacing;
 @include links;
 @include lists;
 @include nav;
