@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 /* global module */
 /* global require */
+=======
+/* global require */
+/* global module */
+>>>>>>> master
 /* global __dirname */
 
 const path = require('path');
@@ -53,7 +58,7 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                use: ['babel-loader', 'eslint-loader']
+                use: ['babel-loader']
             }
         ]
     },
