@@ -38,6 +38,7 @@ BUILTIN_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    'rest_framework',
     'webpack_loader',
     'markupfield',
     'ordered_model',
@@ -256,3 +257,9 @@ DEBUG_TOOLBAR_PANELS = [
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ]
+}

@@ -7,8 +7,8 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 
-import ordered_model.models
 import markupfield.fields
+import ordered_model.models
 
 from zine import factories
 
@@ -74,7 +74,7 @@ class Image(models.Model):
 
 
 @receiver(post_delete, sender=Image)
-def photograph_delete(sender, instance, **kwargs):
+def image_delete(sender, instance, **kwargs):
     instance.image.delete(False)
 
 

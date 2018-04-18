@@ -1,3 +1,4 @@
+import json
 from abc import ABCMeta, abstractmethod
 
 from django.template.defaultfilters import truncatechars
@@ -25,6 +26,11 @@ class ComponentRenderer(metaclass=ABCMeta):
     def admin_string(self):
         """The string to use in the Django admin list display"""
 
+    @property
+    @abstractmethod
+    def json(self):
+        """The component data as JSON"""
+
     @abstractmethod
     def __str__(self):
         """The representation of this component when formatted into strings"""
@@ -39,6 +45,13 @@ class BodyComponentRenderer(ComponentRenderer):
     def admin_string(self):
         return truncatechars(self.component.body.raw, ADMIN_FIELD_TRUNCATE_LENGTH)
 
+    @property
+    def json(self):
+        return {
+            'type': 'body',
+            'body': str(self),
+        }
+
     def __str__(self):
         return self.component.body.raw
 
@@ -51,6 +64,13 @@ class PullQuoteComponentRenderer(ComponentRenderer):
     @property
     def admin_string(self):
         return truncatechars(self.component.quote, ADMIN_FIELD_TRUNCATE_LENGTH)
+
+    @property
+    def json(self):
+        return {
+            'type': 'quote',
+            'quote': str(self),
+        }
 
     def __str__(self):
         return self.component.quote
@@ -79,6 +99,15 @@ class ImageComponentRenderer(ComponentRenderer):
     @property
     def alt_text(self):
         return self.component.image_alt_text_override or self.component.image.alt_text
+
+    @property
+    def json(self):
+        return json.dumps({
+            'type': 'image',
+            'src': self.component.image.image.url,
+            'alt_text': self.component.image_alt_text_override or self.component.image.alt_text,
+            'caption': self.component.image_caption.raw,
+        })
 
     def __str__(self):
         return self.alt_text

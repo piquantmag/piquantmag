@@ -35,7 +35,7 @@
         {% endif %}
         {% if user.is_staff %}
         <div class="text-center">
-            <a href="{% url 'admin:zine_article_change' article.id %}" class="underline">{% trans 'Edit' %}</a>
+            <a href="{% url 'zine:article_edit' article.id %}" class="underline">{% trans 'Edit' %}</a>
         </div>
         {% endif %}
     </header>

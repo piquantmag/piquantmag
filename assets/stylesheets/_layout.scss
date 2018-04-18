@@ -19,5 +19,21 @@
         width: 75vw;
         margin: 0 auto;
         max-width: 750px;
+
+        &.extra-wide {
+            max-width: 1500px;
+        }
+    }
+
+    .flex {
+        display: flex;
+
+        .fg1 {
+            flex-grow: 1;
+        }
+
+        .fg0 {
+            flex-grow: 0;
+        }
     }
 }

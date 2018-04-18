@@ -14,6 +14,9 @@ class MockComponentRenderer(component_renderers.ComponentRenderer):
     def admin_string(self):
         return 'some admin string'
 
+    def json(self):
+        return '{}'
+
     def __str__(self):
         return 'I am a mock component!'
 

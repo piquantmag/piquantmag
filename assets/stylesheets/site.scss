@@ -1,7 +1,8 @@
-@import 'utils';
 @import 'settings';
+@import 'utils';
 @import 'typography';
 @import 'layout';
+@import 'spacing';
 @import 'components/links';
 @import 'components/lists';
 @import 'components/nav';
@@ -13,6 +14,7 @@
 
 @include utils;
 @include typography;
+@include spacing;
 @include layout;
 @include links;
 @include lists;
@@ -22,3 +24,22 @@
 @include forms;
 @include cards;
 @include images;
+
+
+#article-manager {
+    display: flex;
+
+    #editor {
+        flex-basis: 33%;
+        flex-grow: 0;
+        padding-right: $base-spacing * 5;
+    }
+
+    #rendered {
+        flex-grow: 1;
+        max-width: 750px;
+        padding: 0 $base-spacing * 10;
+        border-left: 1px solid map-get($colors, 'light-gray');
+        margin-top: 0;
+    }
+}

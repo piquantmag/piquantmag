@@ -1,0 +1,25 @@
+{% extends '__base.html' %}
+
+{% load webpack_loader %}
+
+{% block extra_meta_tags %}
+{% render_bundle 'authoring' 'css' %}
+{% endblock %}
+
+{% block extra_main_classes %} class="extra-wide"{% endblock %}
+
+{% block page_title %}{% if article_title %}Editing {{ article_title }}{% else %}Create Article{% endif %} | {{ block.super }}{% endblock %}
+
+{% block content %}
+<h1>{% if article_title %}Edit{% else %}Create{% endif %} Article</h1>
+<div id="media-manager"></div>
+<div id="article-manager"></div>
+{% endblock content %}
+
+{% block javascript %}
+{{ block.super }}
+<script>
+let articleId = {{ article_id|default:-1 }}
+</script>
+{% render_bundle 'authoring' 'js' %}
+{% endblock javascript %}

@@ -1,13 +1,15 @@
 import logging
 
-from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views.generic import DetailView, TemplateView, View
+from rest_framework import viewsets
 
-from zine import models
-
+from zine import models, serializers
 
 LOGGER = logging.getLogger(__name__)
 
@@ -56,6 +58,35 @@ class ArticlePreviewView(View):
                 'article': article,
             }
         )
+
+
+@method_decorator(login_required, name='dispatch')
+class ArticleCreateView(View):
+    def get(self, request, *args, **kwargs):
+        return render(
+            request,
+            'zine/article/edit.html',
+        )
+
+    def post(self, request, *args, **kwargs):
+        return HttpResponse('Received the POST!')
+
+
+@method_decorator(login_required, name='dispatch')
+class ArticleEditView(View):
+    def get(self, request, *args, **kwargs):
+        article_id = kwargs.get('article_id')
+
+        return render(
+            request,
+            'zine/article/edit.html',
+            {
+                'article_id': article_id,
+            }
+        )
+
+    def post(self, request, *args, **kwargs):
+        return HttpResponse('Received the POST!')
 
 
 class AmpArticleView(DetailView):
@@ -117,3 +148,18 @@ class ManifestView(TemplateView):
 class BrowserConfigView(TemplateView):
     template_name = 'browserconfig.xml'
     content_type = 'text/xml'
+
+
+class ImageViewSet(viewsets.ModelViewSet):
+    queryset = models.Image.objects.all()
+    serializer_class = serializers.ImageSerializer
+
+
+class ArticleViewSet(viewsets.ModelViewSet):
+    queryset = models.Article.objects.all()
+    serializer_class = serializers.ArticleSerializer
+
+
+class IssueViewSet(viewsets.ModelViewSet):
+    queryset = models.Issue.objects.all()
+    serializer_class = serializers.IssueSerializer

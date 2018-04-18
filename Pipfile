@@ -1,18 +1,13 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [dev-packages]
-
 coverage = "*"
 django-debug-toolbar = "*"
 
-
 [packages]
-
 zappa = "*"
 django = "==2.0"
 django-storages = "*"
@@ -24,8 +19,8 @@ django-markupfield = "*"
 django-ordered-model = "*"
 markdown = "*"
 pillow = "*"
-
+djangorestframework = "*"
+coreapi = "*"
 
 [requires]
-
 python_version = "3.6"

@@ -52,7 +52,7 @@
     </head>
     <body>
         {% include '__i_nav.html' %}
-        <main>
+        <main{% block extra_main_classes%}{% endblock %}>
             {% block content %}{% endblock content %}
         </main>
         {% include '__i_footer.html' %}

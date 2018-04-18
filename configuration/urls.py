@@ -8,6 +8,8 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 
 import debug_toolbar
+import rest_framework.urls
+import rest_framework.documentation
 
 import about.urls
 import communication.urls
@@ -29,6 +31,8 @@ full_sitemap = {
 
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
+    path('api/', include(rest_framework.urls, namespace='rest_framework')),
+    path('api/docs/', rest_framework.documentation.include_docs_urls('Piquant', 'Authoring API', public=False)),
     path('sitemap.xml', sitemap, {'sitemaps': full_sitemap}, name='sitemap'),
     path('feed/', feeds.IssueFeed(), name='feed'),
     path('about/', include(about.urls)),
@@ -36,7 +40,7 @@ urlpatterns = [
     path('service-worker.js', TemplateView.as_view(
         template_name='service-worker.js',
         content_type='application/javascript'),
-         name='service_worker'
+        name='service_worker'
     ),
     path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain'), name='robots'),
     path('', include(communication.urls)),

@@ -1,12 +1,27 @@
 @import '../settings';
 
 @mixin forms {
-    input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
+    input {
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="file"]) {
         height: $button-and-input-height;
         font-size: $base-font-size-rem;
         font-family: $body-font-family;
         padding: 0 $input-horizontal-padding;
         border: $input-border-width solid $input-border-color;
+    }
+
+    textarea {
+        border: $input-border-width solid $input-border-color;
+        font-size: $base-font-size-rem;
+        font-family: $body-font-family;
+        padding: $textarea-padding;
+        resize: vertical;
+        height: $textarea-default-height;
+        width: $textarea-default-width;
         margin-top: 0;
         margin-bottom: 1.5rem;
     }
@@ -19,7 +34,7 @@
     label {
         display: block;
         font-weight: bold;
-        margin-right: $base-padding;
+        margin-right: $base-spacing;
     }
 
 
@@ -37,9 +52,6 @@
 
     input[type="radio"],
     input[type="checkbox"] {
-        margin-top: 0;
-        margin-bottom: 1.5rem;
-
         &:hover {
             cursor: pointer;
         }
