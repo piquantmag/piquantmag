@@ -35,8 +35,8 @@
         flex-direction: column;
         justify-content: center;
         margin-top: 0;
-        padding: $base-padding * 4;
-        flex-basis: calc(50% - #{$base-padding * 4 * 2});
+        padding: $base-spacing * 4;
+        flex-basis: calc(50% - #{$base-spacing * 4 * 2});
 
         .card-title {
             font-size: 3rem;

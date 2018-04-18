@@ -1,6 +1,6 @@
 $default-line-height: 1.5;
 
-$base-padding: 5px;
+$base-spacing: 5px;
 $base-border-radius: 2px;
 
 $colors: (
@@ -41,8 +41,8 @@ $nav-font-size-rem: 2rem;
 $footer-font-size-rem: 1.6rem;
 $footer-border-color: map-get($colors, 'light-gray');
 
-$button-vertical-padding: $base-padding;
-$button-horizontal-padding: $base-padding * 2;
+$button-vertical-padding: $base-spacing;
+$button-horizontal-padding: $base-spacing * 2;
 $button-border-width: 2px;
 $button-background-color: map-get($colors, 'black');
 $button-text-color: map-get($colors, 'white');
@@ -54,8 +54,8 @@ $button-and-input-height: 4rem;
 
 $input-border-width: 1px;
 $input-border-color: map-get($colors, 'light-gray');
-$input-vertical-padding: $base-padding;
-$input-horizontal-padding: $base-padding * 2;
+$input-vertical-padding: $base-spacing;
+$input-horizontal-padding: $base-spacing * 2;
 
 $card-border-color: map-get($colors, 'light-gray');
 
