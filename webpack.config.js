@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 /* global module */
 /* global require */
-=======
-/* global require */
-/* global module */
->>>>>>> master
 /* global __dirname */
 
 const path = require('path');
