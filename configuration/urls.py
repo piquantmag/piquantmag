@@ -24,6 +24,7 @@ full_sitemap = {
     'miscellaneous': sitemaps.MiscellaneousPageSitemap([
         'zine:home',
         'communication:newsletter',
+        'about:about',
     ])
 }
 
