@@ -16,6 +16,7 @@
             <a href="{% url 'admin:zine_issue_change' issue.id %}" class="underline">{% trans 'Edit' %}</a>
         </div>
         {% endif %}
+        <img src="{{ issue.cover_image.image.url }}" alt="{{ issue.cover_image.alt_text }}">
     </header>
     <section>
         <p>

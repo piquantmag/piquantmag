@@ -13,17 +13,22 @@ class IssueAdmin(ordered_model.admin.OrderedModelAdmin):
             'fields': [
                 ('title', 'slug',),
                 'synopsis',
-            ]
+            ],
+        }),
+        (_('Cover Image'), {
+            'fields': [
+                'cover_image',
+            ],
         }),
         (_('Publication Information'), {
             'fields': [
                 'publication_date',
-            ]
+            ],
         }),
         (_('History'), {
             'fields': [
                 ('created_time', 'updated_time',),
-            ]
+            ],
         })
     )
 
@@ -32,5 +37,6 @@ class IssueAdmin(ordered_model.admin.OrderedModelAdmin):
     list_display = ('title', 'move_up_down_links', 'is_published',)
     date_hierarchy = 'publication_date'
     search_fields = ('title',)
+    raw_id_fields = ('cover_image',)
     readonly_fields = ('created_time', 'updated_time',)
     save_on_top = True

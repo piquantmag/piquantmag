@@ -12,6 +12,7 @@
     {% if latest_issue %}
         <header>
         <h2>{{ latest_issue.title }}</h2>
+        <img src="{{ latest_issue.cover_image.image.url }}" alt="{{ latest_issue.cover_image.image.alt_text }}">
         </header>
         <section>
             <p>
