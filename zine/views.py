@@ -84,7 +84,12 @@ class IssueView(DetailView):
             issues = models.Issue.objects
         else:
             issues = models.Issue.published_issues
-        return issues.prefetch_related('article_set')
+        return (
+            issues
+            .filter(slug=self.kwargs['issue_slug'])
+            .select_related('cover_image')
+            .prefetch_related('article_set__cover_image')
+        )
 
 
 class HomeView(TemplateView):
@@ -96,8 +101,8 @@ class HomeView(TemplateView):
         latest_issue = (
             models.Issue
             .published_issues
-            .prefetch_related('article_set')
             .prefetch_related('article_set__cover_image')
+            .select_related('cover_image')
             .first()
         )
 

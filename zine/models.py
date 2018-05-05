@@ -30,12 +30,30 @@ class PublishedIssueManager(models.Manager):
         return super().get_queryset().filter(publication_date__lte=timezone.now())
 
 
+class Image(models.Model):
+    image = models.ImageField(height_field='height', width_field='width')
+    alt_text = models.CharField(max_length=100)
+    height = models.PositiveSmallIntegerField()
+    width = models.PositiveSmallIntegerField()
+
+    def admin_thumbnail(self):
+        return mark_safe(f'<img src="{self.image.url}" height="100" />')
+    admin_thumbnail.short_description = 'Thumbnail'
+
+    def __str__(self):
+        return repr(self)
+
+    def __repr__(self):
+        return f'<{self.__class__.__name__} file="{self.image.name}" alt="{self.alt_text}">'
+
+
 class Issue(ordered_model.models.OrderedModel):
     title = models.CharField(max_length=255)
     slug = models.SlugField()
     publication_date = models.DateTimeField(blank=True, null=True)
     synopsis = markupfield.fields.MarkupField(markup_type='markdown', blank=True, null=True)
     created_time = models.DateTimeField(auto_now_add=True)
+    cover_image = models.ForeignKey(Image, blank=True, null=True, on_delete=models.SET_NULL)
     updated_time = models.DateTimeField(auto_now=True)
 
     objects = models.Manager()
@@ -54,23 +72,6 @@ class Issue(ordered_model.models.OrderedModel):
 
     def __str__(self):
         return self.title
-
-
-class Image(models.Model):
-    image = models.ImageField(height_field='height', width_field='width')
-    alt_text = models.CharField(max_length=100)
-    height = models.PositiveSmallIntegerField()
-    width = models.PositiveSmallIntegerField()
-
-    def admin_thumbnail(self):
-        return mark_safe(f'<img src="{self.image.url}" height="100" />')
-    admin_thumbnail.short_description = 'Thumbnail'
-
-    def __str__(self):
-        return repr(self)
-
-    def __repr__(self):
-        return f'<{self.__class__.__name__} file="{self.image.name}" alt="{self.alt_text}">'
 
 
 @receiver(post_delete, sender=Image)
