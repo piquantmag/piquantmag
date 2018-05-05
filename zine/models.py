@@ -34,7 +34,7 @@ class Issue(ordered_model.models.OrderedModel):
     title = models.CharField(max_length=255)
     slug = models.SlugField()
     publication_date = models.DateTimeField(blank=True, null=True)
-    synopsis = models.TextField(blank=True, null=True)
+    synopsis = markupfield.fields.MarkupField(markup_type='markdown', blank=True, null=True)
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
 
@@ -87,7 +87,7 @@ class Article(ordered_model.models.OrderedModel):
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
     issue = models.ForeignKey(Issue, blank=True, null=True, on_delete=models.SET_NULL)
-    synopsis = models.TextField(blank=True, null=True)
+    synopsis = markupfield.fields.MarkupField(markup_type='markdown', blank=True, null=True)
     authors = models.ManyToManyField(Author, blank=True)
     cover_image = models.ForeignKey(Image, blank=True, null=True, on_delete=models.SET_NULL)
     created_time = models.DateTimeField(auto_now_add=True)
