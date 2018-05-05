@@ -12,11 +12,14 @@
     <header>
         <h1>{{ issue.title }}</h1>
         {% if user.is_staff %}
-        <div class="text-center">
-            <a href="{% url 'admin:zine_issue_change' issue.id %}" class="underline">{% trans 'Edit' %}</a>
-        </div>
+            <div class="text-center">
+                <a href="{% url 'admin:zine_issue_change' issue.id %}" class="underline">{% trans 'Edit' %}</a>
+            </div>
         {% endif %}
-        <img src="{{ issue.cover_image.image.url }}" alt="{{ issue.cover_image.alt_text }}">
+
+        {% if issue.cover_image %}
+            <img src="{{ issue.cover_image.image.url }}" alt="{{ issue.cover_image.alt_text }}">
+        {% endif %}
     </header>
     <section>
         <p>

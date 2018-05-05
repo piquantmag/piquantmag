@@ -11,14 +11,25 @@
     <h1>Piquant</h1>
     {% if latest_issue %}
         <header>
-        <h2>{{ latest_issue.title }}</h2>
-        <img src="{{ latest_issue.cover_image.image.url }}" alt="{{ latest_issue.cover_image.image.alt_text }}">
+            <h2>{{ latest_issue.title }}</h2>
+
+            {% if user.is_staff %}
+                <div class="text-center">
+                    <a href="{% url 'admin:zine_issue_change' latest_issue.id %}" class="underline">{% trans 'Edit' %}</a>
+                </div>
+            {% endif %}
+
+            {% if latest_issue.cover_image %}
+                <img src="{{ latest_issue.cover_image.image.url }}" alt="{{ latest_issue.cover_image.image.alt_text }}">
+            {% endif %}
         </header>
+
         <section>
             <p>
                 {{ latest_issue.synopsis.rendered|safe }}
             </p>
         </section>
+
         {% include 'zine/issue/__i_article_set.html' with issue=latest_issue %}
     {% else %}
         {% include 'communication/__i_newsletter_snippet.html' %}
