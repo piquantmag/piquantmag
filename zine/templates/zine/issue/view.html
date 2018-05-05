@@ -3,10 +3,10 @@
 {% load i18n %}
 
 {% block page_title %}{{ issue }} | {{ block.super }}{% endblock %}
-{% block page_description %}{{ issue.synopsis }}{% endblock %}
+{% block page_description %}{{ issue.synopsis.rendered|striptags }}{% endblock %}
 
 {% block og_title %}{{ issue }} | {{ block.super }}{% endblock %}
-{% block og_description %}{{ issue.synopsis }}{% endblock %}
+{% block og_description %}{{ issue.synopsis.rendered|striptags }}{% endblock %}
 
 {% block content %}
     <header>
@@ -19,7 +19,7 @@
     </header>
     <section>
         <p>
-            {{ issue.synopsis }}
+            {{ issue.synopsis.rendered|safe }}
         </p>
     </section>
 

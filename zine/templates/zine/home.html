@@ -2,10 +2,10 @@
 
 {% load i18n %}
 {% block page_title %}{% if latest_issue %}{{ latest_issue.title }} | {% endif %}{{ block.super }}{% endblock %}
-{% block page_description %}{% if latest_issue %}{{ latest_issue.synopsis|truncatechars:320 }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% block page_description %}{% if latest_issue %}{{ latest_issue.synopsis.rendered|striptags }}{% else %}{{ block.super }}{% endif %}{% endblock %}
 
 {% block og_title %}{% if latest_issue %}{{ latest_issue.title }} | {% endif %}{{ block.super }}{% endblock %}
-{% block og_description %}{% if latest_issue %}{{ latest_issue.synopsis|truncatechars:320 }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% block og_description %}{% if latest_issue %}{{ latest_issue.synopsis.rendered|striptags }}{% else %}{{ block.super }}{% endif %}{% endblock %}
 
 {% block content %}
     <h1>Piquant</h1>
@@ -15,7 +15,7 @@
         </header>
         <section>
             <p>
-                {{ latest_issue.synopsis }}
+                {{ latest_issue.synopsis.rendered|safe }}
             </p>
         </section>
         {% include 'zine/issue/__i_article_set.html' with issue=latest_issue %}
