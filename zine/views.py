@@ -31,6 +31,20 @@ class ArticleView(DetailView):
             .prefetch_related('authors')
         )
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+
+        this_issue = self.object.issue
+        articles_in_this_issue = this_issue.article_set.all()
+        previous_article = articles_in_this_issue.filter(order__lt=self.object.order).last()
+        next_article = articles_in_this_issue.filter(order__gt=self.object.order).first()
+
+        context.update({
+            'previous_article': previous_article,
+            'next_article': next_article,
+        })
+        return context
+
 
 class ArticlePreviewView(View):
     def get(self, request, *args, **kwargs):

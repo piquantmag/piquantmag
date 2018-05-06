@@ -4,7 +4,6 @@ $base-spacing: 5px;
 $base-border-radius: 2px;
 
 $colors: (
-    'primary': #FF0000,
     'white': #FFFFFF,
     'black': #333333,
     'light-gray': #CCCCCC,
@@ -61,3 +60,5 @@ $card-border-color: map-get($colors, 'light-gray');
 
 $image-caption-font-size: 1.4rem;
 $image-caption-font-color: map-get($colors, 'disabled-text');
+
+$hr-color: map-get($colors, 'light-gray');

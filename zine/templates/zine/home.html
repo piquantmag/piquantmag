@@ -24,10 +24,8 @@
             {% endif %}
         </header>
 
-        <section>
-            <p>
-                {{ latest_issue.synopsis.rendered|safe }}
-            </p>
+        <section class="mbxl">
+            {{ latest_issue.synopsis.rendered|safe }}
         </section>
 
         {% include 'zine/issue/__i_article_set.html' with issue=latest_issue %}
