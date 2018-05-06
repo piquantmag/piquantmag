@@ -1,0 +1,44 @@
+@import '../settings';
+@import 'media-queries';
+
+@mixin pagination-card {
+    @extend .card;
+
+    display: flex;
+    flex-basis: 50%;
+    margin: $base-spacing * 2;
+
+    @include respond-to(medium-down) {
+        width: 100%;
+    }
+
+    .card-body {
+        flex-basis: 100%;
+    }
+
+    .card-pagination {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: all 0.25s ease-in-out;
+
+        &:hover {
+            transform: scale(1.25);
+        }
+
+        &.next {
+            padding-right: $base-spacing * 2;
+        }
+
+        &.previous {
+            padding-left: $base-spacing * 2
+        }
+    }
+}
+
+@mixin pagination-cards {
+    .pagination-card {
+        @include pagination-card;
+    }
+}

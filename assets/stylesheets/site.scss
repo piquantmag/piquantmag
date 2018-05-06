@@ -10,7 +10,9 @@
 @import 'components/buttons';
 @import 'components/forms';
 @import 'components/cards';
+@import 'components/pagination-cards';
 @import 'components/images';
+@import 'components/separators';
 
 @include utils;
 @include typography;
@@ -23,4 +25,15 @@
 @include buttons;
 @include forms;
 @include cards;
+@include pagination-cards;
 @include images;
+@include separators;
+
+.article-pagination {
+    display: flex;
+    justify-content: space-around;
+
+    @include respond-to(medium-down) {
+        display: block;
+    }
+}

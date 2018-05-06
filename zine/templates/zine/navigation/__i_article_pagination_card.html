@@ -1,0 +1,20 @@
+<div class="card pagination-card">
+    {% if direction == 'previous' %}
+        <a href="{% url 'zine:article' issue.slug article.slug %}" class="card-pagination previous">
+            <i class="fas fa-chevron-left" title="Previous article"></i>
+        </a>
+    {% endif %}
+    <div class="card-body">
+        <header class="card-title">
+            <a href="{% url 'zine:article' issue.slug article.slug %}">
+                {{ article }}
+            </a>
+        </header>
+        <section class="card-description">{{ article.synopsis }}</section>
+    </div>
+    {% if direction == 'next' %}
+        <a href="{% url 'zine:article' issue.slug article.slug %}" class="card-pagination next">
+            <i class="fas fa-chevron-right" title="Next article"></i>
+        </a>
+    {% endif %}
+</div>

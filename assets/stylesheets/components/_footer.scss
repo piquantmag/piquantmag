@@ -2,7 +2,7 @@
 @import 'media-queries';
 
 @mixin footer {
-    footer {
+    body > footer {
         font-size: $footer-font-size-rem;
         border-top: 1px solid $footer-border-color;
         padding: $base-spacing * 4;

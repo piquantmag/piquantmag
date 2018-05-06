@@ -21,10 +21,9 @@
             <img src="{{ issue.cover_image.image.url }}" alt="{{ issue.cover_image.alt_text }}">
         {% endif %}
     </header>
-    <section>
-        <p>
-            {{ issue.synopsis.rendered|safe }}
-        </p>
+
+    <section class="mbxl">
+        {{ issue.synopsis.rendered|safe }}
     </section>
 
     {% include 'zine/issue/__i_article_set.html' %}
