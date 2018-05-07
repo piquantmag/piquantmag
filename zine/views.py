@@ -1,6 +1,6 @@
 import logging
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils.translation import gettext as _
@@ -68,8 +68,22 @@ class ArticlePreviewView(View):
             template_name='zine/article/view.html',
             context={
                 'article': article,
+                'is_preview': True,
             }
         )
+
+
+class ArticlePreviewGetOrCreateView(View):
+    def get(self, request, *args, **kwargs):
+        if request.user.is_staff:
+            article = get_object_or_404(models.Article, slug=kwargs.get('article_slug'))
+            preview = models.ArticlePreview.objects.get_or_create(article=article)[0]
+
+            return HttpResponseRedirect(
+                reverse('zine:article_preview', kwargs={'uuid': preview.uuid})
+            )
+        else:
+            raise Http404('Non-staff user cannot create article previews')
 
 
 class AmpArticleView(DetailView):

@@ -95,4 +95,4 @@ class ImageAdmin(admin.ModelAdmin):
 class ArticlePreviewAdmin(admin.ModelAdmin):
     fields = ('article',)
     readonly_fields = ('uuid',)
-    list_display = ('article', 'uuid',)
+    list_display = ('article', 'uuid', 'is_published',)
