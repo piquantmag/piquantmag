@@ -49,7 +49,7 @@ class Image(models.Model):
 
 class Issue(ordered_model.models.OrderedModel):
     title = models.CharField(max_length=255)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     publication_date = models.DateTimeField(blank=True, null=True)
     synopsis = markupfield.fields.MarkupField(markup_type='markdown', blank=True, null=True)
     created_time = models.DateTimeField(auto_now_add=True)
@@ -63,7 +63,7 @@ class Issue(ordered_model.models.OrderedModel):
         ordering = ['order']
 
     def is_published(self):
-        return self.publication_date and self.publication_date <= timezone.now()
+        return self.publication_date <= timezone.now() if self.publication_date else False
     is_published.boolean = True
     is_published.short_description = 'Published'
 
@@ -103,7 +103,7 @@ class Article(ordered_model.models.OrderedModel):
         ordering = ['order']
 
     def is_published(self):
-        return self.issue and self.issue.is_published()
+        return self.issue.is_published() if self.issue else False
     is_published.boolean = True
     is_published.short_description = 'Published'
 
@@ -156,3 +156,8 @@ class Component(ordered_model.models.OrderedModel):
 class ArticlePreview(models.Model):
     uuid = models.CharField(max_length=36, editable=False, unique=True, default=uuid.uuid4, verbose_name='UUID')
     article = models.OneToOneField(Article, on_delete=models.CASCADE)
+
+    def is_published(self):
+        return self.article.is_published()
+    is_published.boolean = True
+    is_published.short_description = 'Published'
