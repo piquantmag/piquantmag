@@ -9,24 +9,36 @@
 {% block og_description %}{% trans 'Learn more about us and our mission at Piquant' %}{% endblock %}
 
 {% block content %}
-<h1>{% trans 'About' %}</h1>
+<h1>{% trans 'What is Piquant?' %}</h1>
 
     <p>
-    {% blocktrans %}
-    <span class="piquant">Piquant</span> was created as an answer to a series of questions we found ourselves asking
-    over and over again. We wanted to know not only where our food came from, but where its ingredients came from.
-    We wanted to know why exactly salt, fat, and sugar have been considered unhealthy at one time or healthy at another.
-    We wanted to know the rich cultural traditions and history behind dishes we eat every day.
-    {% endblocktrans %}
+        {% blocktrans %}
+        <span class="piquant">Piquant</span> is the answer to a question. It's the answer to many questions.
+        <em>
+            What's in this food I'm eating?
+            Where did these ingredients come from?
+            When did people start eating this?
+        </em>
+        The deeper the rabbit hole grew, the thirstier we grew for knowledge about the origins of food.
+        {% endblocktrans %}
     </p>
 
     <p>
-    {% blocktrans %}
-    Once we started digging to find some of these answers, we decided to embark on a journey to share this knowledge
-    as widely as possible. Our hope is that you will use <span class="Piquant"> as a resource to inform your buying,
-    eating, and lifestyle habits. We also hope you'll strike up similar conversations with people who have interesting
-    stories and lore to share.
-    {% endblocktrans %}
+        {% blocktrans %}
+        The science, history, culture, and enjoyment of food is something we want to explore and share with you.
+        We want you to learn alongside us and share your most intimate experiences with food, agriculture, and more.
+        We're interested in hearing from farmers, chefs, nutritionists, historians, and enthusiasts alike so that we
+        can comprehensively uncover what food is all about.
+        {% endblocktrans %}
+    </p>
+
+    <hr class="mtxl mbxl" />
+
+    <p>
+        {% url 'communication:newsletter' as signup_link %}
+        {% blocktrans %}
+        Please <a href="{{ signup_link }}">join the adventure</a> and reach out with your stories whenever you'd like.
+        {% endblocktrans %}
     </p>
 {% endblock content %}
 
