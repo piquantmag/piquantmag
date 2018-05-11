@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load static %}
+{% load readtime %}
 
 {% block page_title %}{{ article }} | {{ article.issue }} | {{ block.super }}{% endblock %}
 {% block page_description %}{{ article.synopsis }}{% endblock %}
@@ -29,15 +30,17 @@
 
         {% if article.authors.all %}
             <span class="text-center">
-                By {{ article.authors.all|join:", " }}
+                by {{ article.authors.all|join:", " }}
             </span>
         {% endif %}
 
-        {% if article.issue %}
-            <span class="text-center">
-                {% trans 'From the issue' %} <a href="{% url 'zine:issue' article.issue.slug %}" class="piquant underline">{{ article.issue.title }}</a>
-            </span>
-        {% endif %}
+        <span class="mtxs text-center muted">
+            {% blocktrans with minutes=article.html|striptags|readtime %}A {{ minutes }}-minute read{% endblocktrans %}
+
+            {% if article.issue %}
+                {% trans 'from the issue' %} <a href="{% url 'zine:issue' article.issue.slug %}" class="piquant underline">{{ article.issue.title }}</a>
+            {% endif %}
+        </span>
 
         {% if user.is_staff %}
             <div class="text-center">

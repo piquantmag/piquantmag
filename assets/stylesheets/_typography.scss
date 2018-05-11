@@ -92,4 +92,8 @@
     .underline {
         text-decoration: underline !important;
     }
+
+    .muted {
+        color: map-get($colors, 'muted');
+    }
 }
