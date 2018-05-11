@@ -57,10 +57,15 @@
         font-size: $base-font-size-rem * 9 / 2;
         margin: #{$base-font-size-rem * 9 / 2 / 2} 0;
         font-family: $impact-font-family;
+
+        @include respond-to(handhelds) {
+            font-size: $mobile-font-size-rem * 9 / 2;
+        }
     }
 
     @for $heading-level from 2 through 6 {
         $heading-font-size-rem: $base-font-size-rem * 1/2 * ((6 - $heading-level) + 2);
+        $heading-mobile-font-size-rem: $mobile-font-size-rem * 1/2 * ((6 - $heading-level) + 2);
         $heading-margin-rem: $heading-font-size-rem / 2;
 
         h#{$heading-level} {

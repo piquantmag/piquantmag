@@ -1,3 +1,5 @@
+@import 'media-queries';
+
 @mixin layout {
     *,
     ::after,
@@ -19,5 +21,9 @@
         width: 75vw;
         margin: 0 auto;
         max-width: 750px;
+
+        @include respond-to(handhelds) {
+            width: 85vw;
+        }
     }
 }

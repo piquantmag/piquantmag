@@ -1,3 +1,5 @@
+@import 'media-queries';
+
 $default-line-height: 1.5;
 
 $base-spacing: 5px;
@@ -11,15 +13,13 @@ $colors: (
     'disabled-background': #EEEEEE
 );
 
-$breakpoint-small: 480px;
-$breakpoint-large: 768px;
-
 $body-font-family: 'Spectral', serif;
 $body-font-reset-size: 62.5%;
 $body-font-color: map-get($colors, 'black');
 $disabled-font-color: map-get($colors, 'light-gray');
 
 $base-font-size-rem: 1.6rem;
+$mobile-font-size-rem: 1rem;
 
 $heading-font-family: 'Georgia';
 $heading-font-weight: 100;

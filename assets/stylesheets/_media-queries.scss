@@ -1,0 +1,32 @@
+$breakpoints: (
+    small: 480px,
+    large: 768px
+);
+
+@mixin respond-to($media) {
+    @if $media == handhelds {
+        @media only screen and (max-width: map-get($breakpoints, small)) {
+            @content;
+        }
+    }
+    @else if $media == medium {
+        @media only screen and (min-width: map-get($breakpoints, small) + 1) and (max-width: map-get($breakpoints, large)) {
+            @content;
+        }
+    }
+    @else if $media == medium-down {
+        @media only screen and (max-width: map-get($breakpoints, large)) {
+            @content;
+        }
+    }
+    @else if $media == medium-up {
+        @media only screen and (min-width: map-get($breakpoints, small) + 1) {
+            @content;
+        }
+    }
+    @else if $media == large {
+        @media only screen and (min-width: map-get($breakpoints, large) + 1) {
+            @content;
+        }
+    }
+}

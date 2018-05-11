@@ -1,15 +1,17 @@
 @import '../settings';
-@import 'media-queries';
+@import '../media-queries';
 
 @mixin pagination-card {
     @extend .card;
 
+    $margin: $base-spacing * 2;
+
     display: flex;
     flex-basis: 50%;
-    margin: $base-spacing * 2;
+    margin: $margin;
 
     @include respond-to(medium-down) {
-        width: 100%;
+        width: calc(100% - (#{$margin} * 2));
     }
 
     .card-body {
