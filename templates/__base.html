@@ -51,7 +51,7 @@
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     </head>
     <body>
-        {% include '__i_nav.html' %}
+        {% block topnav %}{% include '__i_nav.html' %}{% endblock %}
         <main>
             {% block content %}{% endblock content %}
         </main>

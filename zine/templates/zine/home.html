@@ -8,9 +8,10 @@
 {% block og_description %}{% if latest_issue %}{{ latest_issue.synopsis.rendered|striptags }}{% else %}{{ block.super }}{% endif %}{% endblock %}
 
 {% block content %}
-    <h1>Piquant</h1>
-    {% if latest_issue %}
-        <header>
+    {% block topnav %}{% endblock %}
+    <header>
+        <h1>Piquant</h1>
+        {% if latest_issue %}
             <h2>{{ latest_issue.title }}</h2>
 
             {% if user.is_staff %}
@@ -22,8 +23,10 @@
             {% if latest_issue.cover_image %}
                 <img src="{{ latest_issue.cover_image.image.url }}" alt="{{ latest_issue.cover_image.alt_text }}">
             {% endif %}
-        </header>
+        {% endif %}
+    </header>
 
+    {% if latest_issue %}
         <section class="mbxl">
             {{ latest_issue.synopsis.rendered|safe }}
         </section>
