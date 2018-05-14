@@ -1,4 +1,5 @@
 @import '../settings';
+@import '../_media-queries';
 
 @mixin button {
     height: $button-and-input-height;
@@ -8,6 +9,8 @@
     color: $button-text-color;
     font-family: $body-font-family;
     font-size: $base-font-size-rem;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
 
     &:hover {
         cursor: pointer;
@@ -18,6 +21,10 @@
     transition-duration: 0.2s;
     transition-timing-function: ease-in-out;
     transition-property: background, color, border-color;
+
+    @include respond-to(handhelds) {
+        width: 100%;
+    }
 }
 
 @mixin secondary-button {

@@ -4,28 +4,28 @@
 <hr />
 <form>
     <label for="text-input">{% trans 'Text Input' %}</label>
-    <input type="text" id="text-input" placeholder="{% trans 'placeholder' %}"/>
+    <input type="text" id="text-input" placeholder="{% trans 'placeholder' %}" />
 
     <fieldset>
         <legend>{% trans 'Option Sets' %}</legend>
 
-        <input type="radio" name="radio" value="{% trans 'Option 1' %}" id="radio-input-1"/>
+        <input type="radio" name="radio" value="{% trans 'Option 1' %}" id="radio-input-1" />
         <label for="radio-input-1">{% trans 'Option 1' %}</label>
         <br />
-        <input type="radio" name="radio" value="{% trans 'Option 2' %}" id="radio-input-2"/>
+        <input type="radio" name="radio" value="{% trans 'Option 2' %}" id="radio-input-2" />
         <label for="radio-input-2">{% trans 'Option 2' %}</label>
         <br />
-        <input type="radio" name="radio" value="{% trans 'Option 3' %}" id="radio-input-3"/>
+        <input type="radio" name="radio" value="{% trans 'Option 3' %}" id="radio-input-3" />
         <label for="radio-input-3">{% trans 'Option 3' %}</label>
         <br />
 
-        <input type="checkbox" name="checkbox" value="{% trans 'Option 1' %}" id="checkbox-input-1"/>
+        <input type="checkbox" name="checkbox" value="{% trans 'Option 1' %}" id="checkbox-input-1" />
         <label for="checkbox-input-1">{% trans 'Option 1' %}</label>
         <br />
-        <input type="checkbox" name="checkbox" value="{% trans 'Option 2' %}" id="checkbox-input-2"/>
+        <input type="checkbox" name="checkbox" value="{% trans 'Option 2' %}" id="checkbox-input-2" />
         <label for="checkbox-input-2">{% trans 'Option 2' %}</label>
         <br />
-        <input type="checkbox" name="checkbox" value="{% trans 'Option 3' %}" id="checkbox-input-3"/>
+        <input type="checkbox" name="checkbox" value="{% trans 'Option 3' %}" id="checkbox-input-3" />
         <label for="checkbox-input-3">{% trans 'Option 3' %}</label>
     </fieldset>
 
@@ -37,7 +37,7 @@
     </select>
 
     <fieldset>
-        <button type="submit">Submit</button>
-        <button type="reset" class="secondary">{% trans 'Clear' %}</button>
+        <input type="submit" value="Submit input" class="button" />
+        <input type="reset" class="button secondary" value="{% trans 'Clear' %}" />
     </fieldset>
 </form>
