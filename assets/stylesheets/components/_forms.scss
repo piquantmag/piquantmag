@@ -1,4 +1,5 @@
 @import '../settings';
+@import '../media-queries';
 
 @mixin forms {
     input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
@@ -9,6 +10,10 @@
         border: $input-border-width solid $input-border-color;
         margin-top: 0;
         margin-bottom: 1.5rem;
+
+        @include respond-to(handhelds) {
+            width: 100%;
+        }
     }
 
     select {
