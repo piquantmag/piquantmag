@@ -2,7 +2,7 @@
 @import '../media-queries';
 
 @mixin forms {
-    input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
+    input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="reset"]) {
         height: $button-and-input-height;
         font-size: $base-font-size-rem;
         font-family: $body-font-family;
@@ -10,6 +10,8 @@
         border: $input-border-width solid $input-border-color;
         margin-top: 0;
         margin-bottom: 1.5rem;
+        -webkit-appearance: none;
+        -webkit-border-radius: 0;
 
         @include respond-to(handhelds) {
             width: 100%;
