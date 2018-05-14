@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <div class="text-center">
     <form
         action="https://piquantmag.us17.list-manage.com/subscribe/post?u=523fa74ae2f53d62e9183bc43&amp;id=fdd3cf1a41"
@@ -6,9 +8,9 @@
         novalidate
     >
         <label for="mce-EMAIL" class="sr-only">Email Address </label>
-        <input type="email" placeholder="email address" value="" name="EMAIL" class="mtxl mbn" id="mce-EMAIL">
+        <input type="email" placeholder="{% trans 'email address' %}" value="" name="EMAIL" class="mtxl mbn" id="mce-EMAIL">
 
-        <input type="submit" value="Get status updates" name="subscribe" class="button">
+        <input type="submit" value="{% trans 'Get status updates' %}" name="subscribe" class="button">
 
         <div style="position: absolute; left: -5000px;" aria-hidden="true">
             <label for="signup-key" tabindex="-1">Key</label>
