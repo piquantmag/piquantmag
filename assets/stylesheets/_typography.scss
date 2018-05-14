@@ -65,12 +65,16 @@
 
     @for $heading-level from 2 through 6 {
         $heading-font-size-rem: $base-font-size-rem * 1/2 * ((6 - $heading-level) + 2);
-        $heading-mobile-font-size-rem: $mobile-font-size-rem * 1/2 * ((6 - $heading-level) + 2);
+        $heading-mobile-font-size-rem: $mobile-font-size-rem * 1/2 * ((6 - $heading-level) + 4);
         $heading-margin-rem: $heading-font-size-rem / 2;
 
         h#{$heading-level} {
             font-size: $heading-font-size-rem;
             margin: #{$heading-margin-rem} 0;
+
+            @include respond-to(handhelds) {
+                font-size: $heading-mobile-font-size-rem;
+            }
         }
     }
 
