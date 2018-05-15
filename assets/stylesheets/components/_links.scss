@@ -3,5 +3,9 @@
 @mixin links {
     a {
         color: map-get($colors, 'black');
+
+        &.no-underline {
+            text-decoration: none;
+        }
     }
 }
