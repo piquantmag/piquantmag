@@ -46,7 +46,7 @@ class BodyComponentRenderer(ComponentRenderer):
 class PullQuoteComponentRenderer(ComponentRenderer):
     @property
     def html(self):
-        return mark_safe(f'<blockquote>{self.component.quote}</blockquote>')
+        return mark_safe(f'<blockquote aria-hidden="true">{self.component.quote}</blockquote>')
 
     @property
     def admin_string(self):

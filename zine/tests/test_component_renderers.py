@@ -125,7 +125,7 @@ class PullQuoteComponentRendererTestCase(TestCase):
         self.renderer = component_renderers.PullQuoteComponentRenderer(self.component)
 
     def test_html(self):
-        self.assertEqual(mark_safe('<blockquote>foo</blockquote>'), self.renderer.html)
+        self.assertEqual(mark_safe('<blockquote aria-hidden="true">foo</blockquote>'), self.renderer.html)
 
     def test_admin_string(self):
         self.assertEqual(
