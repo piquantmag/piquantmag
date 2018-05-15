@@ -25,10 +25,6 @@
         justify-content: center;
         transition: all 0.25s ease-in-out;
 
-        &:hover {
-            transform: scale(1.25);
-        }
-
         &.next {
             padding-right: $base-spacing * 2;
         }

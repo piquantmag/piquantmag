@@ -3,12 +3,12 @@
 
 @mixin card {
     border: 1px solid $card-border-color;
-    box-shadow: 5px 5px 10px -5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.25);
     transition: all 0.25s ease-in-out;
 
     &:hover {
-        transform: scale(1.005);
-        box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.5);
+        transform: translateY(-5px);
     }
 
     &.has-image {
@@ -20,7 +20,6 @@
             flex-basis: 40%;
             flex-shrink: 1;
             position: relative;
-            min-height: 250px;
 
             img {
                 object-fit: cover;
@@ -52,10 +51,11 @@
 
     a {
         text-decoration: none;
+    }
 
-        &:hover {
-            text-decoration: underline;
-        }
+    p {
+        margin-left: 0;
+        margin-right: 0;
     }
 
     @at-root {
