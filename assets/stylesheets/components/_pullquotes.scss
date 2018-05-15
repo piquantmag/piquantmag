@@ -1,0 +1,19 @@
+@import '../settings';
+
+@mixin pullquote {
+    & {
+        font-size: 4rem;
+        font-style: italic;
+        color: map-get($colors, 'muted');
+        border-left: 5px solid map-get($colors, 'light-gray');
+        padding-left: 20px;
+        margin: ($base-spacing * 10) 0;
+    }
+}
+
+@mixin pullquotes {
+    blockquote,
+    .pullquote {
+        @include pullquote;
+    }
+}
