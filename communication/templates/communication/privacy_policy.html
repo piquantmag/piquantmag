@@ -1,0 +1,120 @@
+{% extends '__base.html' %}
+
+{% load i18n %}
+
+{% block page_title %}{% trans 'Privacy policy' %} | {{ block.super }}{% endblock %}
+{% block og_title %}{% trans 'Privacy policy' %} | {{ block.super }}{% endblock %}
+
+{% block page_description %}{% trans 'Piquant privacy policy' %}{% endblock %}
+{% block og_description %}{% trans 'Piquant privacy policy' %}{% endblock %}
+
+{% block content %}
+    <h1>Privacy policy</h1>
+
+    <p>
+        This privacy policy describes how <span class="piquant">Piquant</span> uses
+        the personal information you provide and the non-personal information we collect.
+    </p>
+
+    <h2>The information we collect</h2>
+    <p>
+        <span class="piquant">Piquant</span> collects some personal information that
+        helps us create a great experience for you. Some of this data collection depends
+        on how you engage with us and our website.
+    </p>
+    <p>
+        If you browse <a href="{% url 'zine:home' %}">piquantmag.com</a>
+        we collect non-personally identifiable information
+        such as the browser and operating system you are using.
+        This information is passed on to third-party systems as described below.
+    </p>
+    <p>
+        If you wish to receive our newsletter,
+        your email and, optionally, your name will be passed on to third-party systems as described below.
+        You can opt-out of our newsletter at any time
+        via <a href="https://piquantmag.us17.list-manage.com/unsubscribe?u=523fa74ae2f53d62e9183bc43&id=fdd3cf1a41">this link</a>
+        or the link at the bottom of any of our communications.
+        Unsubscribing will handle the information you provided
+        per the third parties' retention policies.
+    </p>
+
+    <h2>Cookies</h2>
+    <p>
+        We use cookies stored in users' browsers to provide a number of services:
+    </p>
+
+    <dl>
+        <dt>Security</dt>
+        <dd>
+            We use cookies to verify that data received by our servers
+            was sent from a page on our website instead of a third party.
+            These cookies contain a cryptographically-secure token.
+        </dd>
+        <dt>Authentication</dt>
+        <dd>
+            We use cookies to maintain persistent authentication for users who create accounts.
+            These cookies contain a randomly-generated identifier.
+        </dd>
+        <dt>Website analytics</dt>
+        <dd>
+            We use third-party services that provide high-level website analytics
+            like volume of traffic and traffic to specific pages.
+            These services use cookies contain a randomly-generated identifier.
+        </dd>
+        <dt>User preferences</dt>
+        <dd>
+            We use cookies to store temporary and long-term user-chosen preferences
+            about the behavior of this website.
+        </dd>
+        <dt>Advertisments</dt>
+        <dd>
+            We may use cookies to periodically display generic advertisements
+            via third-party services.
+        </dd>
+    </dl>
+
+    <h2>Third-party data sharing</h2>
+    <p>
+        <span class="piquant">Piquant</span> may share the information you provide with third parties.
+        We may also forward you to other systems to provide your information directly.
+        This information is used to provide specific services
+        such as marketing emails you opt in to receive
+        as well as tracking application errors.
+    </p>
+
+    <h2>Security</h2>
+    <p>
+        We make a good-faith effort you protect your data.
+        This includes measures standard to the industry such as
+        HTTPS conncetions, password protection, multiple-factor authentication, and use of proven solutions
+        for things like email marketing.
+        We cannot guarantee total protection against malicious attacks
+        but promise to assess these security measures periodically.
+        In the event that we become aware of a breach of our data,
+        we will contact affected parties indicating the breadth of the impact.
+    </p>
+
+    <h2>Consent</h2>
+    <p>
+        By using <a href="{% url 'zine:home' %}">piquantmag.com</a> you consent
+        to the data collection described in this privacy policy.
+        If you wish to have your personally identifiable information removed from our systems
+        you may contact us directly.
+        Upon receiving these requests we will respond in a reasonable timeframe
+        indicating which information is held
+        and which information will be removed.
+        Certain information may require a period of time to remove all instances of the data.
+    </p>
+
+    <h2>Notification of changes</h2>
+    <p>
+        We may need to update the content of this privacy policy periodically.
+        In the event that we make changes, we will notify users who have provided their email addresses.
+    </p>
+
+    <h2>Contact information</h2>
+    <p>
+        You may contact us about privacy-related concerns or questions
+        at <a href="mailto:privacy@piquantmag.com">privacy@piquantmag.com</a>.
+    </p>
+{% endblock content %}

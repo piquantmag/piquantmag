@@ -7,5 +7,5 @@ app_name = 'communication'
 
 
 urlpatterns = [
-    path('newsletter/', communication.views.NewsletterSignupView.as_view(), name='newsletter'),
+    path('privacy-policy/', communication.views.PrivacyPolicyView.as_view(), name='privacy-policy'),
 ]

@@ -23,7 +23,7 @@ full_sitemap = {
     'articles': sitemaps.ArticleSitemap,
     'miscellaneous': sitemaps.MiscellaneousPageSitemap([
         'zine:home',
-        'communication:newsletter',
+        'communication:privacy-policy',
         'about:about',
     ])
 }
