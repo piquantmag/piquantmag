@@ -1,2 +1,13 @@
-<h1><a href="{{ site.domain }}{% url 'zine:issue' obj.slug %}">{{ obj }} | {{ site.name }}</a></h1>
-<p>{{ obj.synopsis }}</p>
+{% load static %}
+
+<h1>
+    <a href="{{ site.domain }}{% url 'zine:issue' obj.slug %}">
+        {{ obj }} | {{ site.name }}
+    </a>
+</h1>
+
+{% if obj.cover_image %}
+<img src="{{ site.domain }}{% static obj.cover_image.image.url %}">
+{% endif %}
+
+<p>{{ obj.synopsis.rendered|safe }}</p>

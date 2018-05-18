@@ -22,13 +22,18 @@
 
         <meta name="google-site-verification" content="maboi7hHdqtxKfUHLE1A9WqKsDcYSaZ7YLXcb8qkOTQ" />
 
-        {# OpenGraph tags #}
         <meta property="fb:app_id" content="{{ FACEBOOK_APP_ID }}">
+
+        {# OpenGraph tags #}
         <meta property="og:type" content="{% block og_type %}website{% endblock %}">
         <meta property="og:title" content="{% block og_title %}Piquant{% endblock %}">
         <meta property="og:url" content="{% block og_url %}https://{{ request.META.HTTP_HOST }}{{ request.get_full_path }}{% endblock %}">
         <meta property="og:description" content="{% block og_description %}{{ DEFAULT_PAGE_DESCRIPTION }}{% endblock %}">
         <meta property="og:site_name" content="Piquant">
+
+        {# Twitter card tags #}
+        <meta property="twitter:card" content="summary">
+        <meta property="twitter:site" content="@piquantmag">
 
         {% block og_images %}
         <meta property="og:image" content="{% static 'images/piquant.png' %}">
