@@ -33,6 +33,17 @@
 
         {% include 'zine/issue/__i_article_set.html' with issue=latest_issue %}
     {% else %}
-        {% include 'communication/__i_newsletter_snippet.html' %}
+        <p>
+            {% blocktrans %}
+            <span class="piquant">Piquant</span> is a publication dedicated to uncovering culture, history, traditions, and
+            secrets about the food we eat every day. Join us in the pursuit to understand the elemental foundations of food and
+            how they come together into something bigger than themselves.
+            {% endblocktrans %}
+        </p>
+        <div class="text-center">
+            <a href="http://eepurl.com/c-1WKL" class="button">
+                Join our newsletter
+            </a>
+        </div>
     {% endif %}
 {% endblock content %}

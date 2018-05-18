@@ -1,5 +1,5 @@
 from django.views import generic
 
 
-class NewsletterSignupView(generic.TemplateView):
-    template_name = 'communication/newsletter.html'
+class PrivacyPolicyView(generic.TemplateView):
+    template_name = 'communication/privacy_policy.html'

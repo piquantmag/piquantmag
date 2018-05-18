@@ -2,13 +2,14 @@
 @import '../_media-queries';
 
 @mixin button {
-    height: $button-and-input-height;
-    padding: 0 $button-horizontal-padding;
+    display: inline-block;
+    padding: $button-vertical-padding $button-horizontal-padding;
     border: $button-border-width solid $button-background-color;
     background: $button-background-color;
     color: $button-text-color;
     font-family: $body-font-family;
     font-size: $base-font-size-rem;
+    text-decoration: none !important;
     -webkit-appearance: none;
     -webkit-border-radius: 0;
 

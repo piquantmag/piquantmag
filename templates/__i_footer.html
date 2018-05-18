@@ -3,7 +3,7 @@
 <footer>
     <ul>
         <li><a href="{% url 'about:about' %}">{% trans 'About' %}</a></li>
-        <li><a href="{% url 'communication:newsletter' %}">{% trans 'Newsletter' %}</a></li>
+        <li><a href="{% url 'communication:privacy-policy' %}">{% trans 'Privacy policy' %}</a></li>
     </ul>
     <ul>
         {% if not exclude_social_links %}
@@ -25,6 +25,9 @@
                     </a>
                 </li>
             </ul>
+            <a href="http://eepurl.com/c-1WKL" class="button mbm">
+                Join our newsletter
+            </a>
         </li>
         {% endif %}
         <li>&copy; {% now "Y" %} Piquant. {% trans 'All Rights Reserved' %}.</li>
