@@ -8,7 +8,6 @@
 {% block og_description %}{% if latest_issue %}{{ latest_issue.synopsis.rendered|striptags }}{% else %}{{ block.super }}{% endif %}{% endblock %}
 
 {% block content %}
-    {% block topnav %}{% endblock %}
     <header>
         <h1>Piquant</h1>
         {% if latest_issue %}

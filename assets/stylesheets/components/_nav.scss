@@ -2,10 +2,11 @@
 
 @mixin nav {
     body {
-        padding-top: 5rem;
+        padding-top: $nav-height;
     }
 
     nav {
+        height: $nav-height;
         font-size: $nav-font-size-rem;
         border-bottom: 1px solid $nav-border-color;
         position: fixed;
@@ -16,11 +17,15 @@
         z-index: 100;
 
         ul, ol {
+            height: 100%;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-between;
             list-style: none;
 
             li {
+                display: flex;
+                align-items: center;
+
                 & a {
                     display: block;
                     padding: $base-spacing * 2;
