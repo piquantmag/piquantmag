@@ -1,6 +1,7 @@
 {% extends '__base_amp.html' %}
 {% load i18n %}
 {% load static %}
+{% load readtime %}
 
 {% block canonical %}{% url 'zine:article' issue_slug=article.issue.slug article_slug=article.slug %}{% endblock %}
 
@@ -42,11 +43,26 @@
     <header>
         <h1>{{ article }}</h1>
         <span class="text-center">
-            By {{ article.authors.all|join:", " }}
+            by {{ article.authors.all|join:", " }}
         </span>
-        <span class="text-center">
-            {% trans 'From the issue' %} <a href="{% url 'zine:issue' article.issue.slug %}" class="piquant underline">{{ article.issue.title }}</a>
+        <span class="mtxs text-center muted">
+            {% blocktrans with minutes=article.html|striptags|readtime %}A {{ minutes }}-minute read{% endblocktrans %}
+            {% if article.issue %}
+                {% trans 'From the issue' %} <a href="{% url 'zine:issue' article.issue.slug %}" class="piquant underline">{{ article.issue.title }}</a>
+            {% endif %}
         </span>
+
+        {% if article.cover_image %}
+        <div class="img-wrapper">
+            <amp-img
+                src="{{ article.cover_image.image.url }}"
+                alt="{{ article.cover_image.alt_text }}"
+                height="{{ article.cover_image.image.height }}"
+                width="{{ article.cover_image.image.width }}"
+                layout="responsive"
+            ></amp-img>
+        </div>
+        {% endif %}
     </header>
     <article>
     {{ article.amphtml }}
