@@ -93,7 +93,7 @@
             "@context": "http://schema.org",
             "@type": "Article",
             "headline": "{{ article.title }}",
-            "description": "{{ article.synopsis }}",
+            "description": "{{ article.synopsis.rendered|striptags }}",
             {% if article.cover_image %}
             "image": [
                 "{{ article.cover_image.image.url }}"
@@ -101,11 +101,17 @@
             {% endif %}
             "datePublished": "{{ article.issue.publication_date|date:'c' }}",
             "dateModified": "{{ article.updated_time|date:'c' }},
-            {% if article.authors.0 %}
-            "author": {
-                "@type": "Person",
-                "name": "{{ article.authors.0.display_name }}"
-            },
+            {% if article.authors.all %}
+                "author": [
+                {% for author in article.authors.all %}
+                    {
+                        "@type": "Person",
+                        "name": "{{ author.display_name }}",
+                        "givenName": "{{ author.given_names }}",
+                        "familyName": "{{ author.family_names }}"
+                    }{% if not forloop.last %},{% endif %}
+                {% endfor %}
+                ],
             {% endif %}
             "publisher": {
                 "@type": "Organization",

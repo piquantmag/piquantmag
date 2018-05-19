@@ -38,6 +38,10 @@
             body {
                 font-size: 1.6rem;
                 font-family: 'Spectral', sans-serif;
+                color: #333333;
+            }
+            a {
+                color: #333333;
             }
             main {
                 padding: 25px;
@@ -45,12 +49,16 @@
             }
             p {
                 font-size: 1.8rem;
+                line-height: 1.5;
+                max-width: 750px;
+                margin: 0 auto;
+            }
+            p + p {
+                text-indent: 3rem;
+                margin-top: 2.25rem;
             }
             .piquant {
                 font-family: 'IM Fell English SC', serif;
-            }
-            a {
-                color: #333333;
             }
             ul, ol {
                 list-style: none;
@@ -74,6 +82,8 @@
             h1 {
                 font-family: 'IM Fell English SC', serif;
                 text-align: center;
+                font-size: 6rem;
+                font-weight: 400;
             }
             h2, h3, h4, h5, h6 {
                 font-family: 'Georgia';
@@ -90,14 +100,27 @@
             footer a {
                 text-decoration: none;
             }
+            footer a:hover {
+                text-decoration: underline;
+            }
+            .muted {
+                color: #777777;
+            }
+            .img-wrapper {
+                max-width: 250px;
+                margin: 0 auto;
+            }
         </style>
     </head>
     <body>
         {% include '__i_nav.html' %}
+
         <main>
-        {% block content %}{% endblock %}
+            {% block content %}{% endblock %}
         </main>
+
         {% include '__i_footer.html' with exclude_social_links=True %}
+
         {% if IS_PRODUCTION %}
         <amp-analytics type="googleanalytics">
             <script type="application/json">
