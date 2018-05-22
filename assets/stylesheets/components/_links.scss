@@ -2,7 +2,7 @@
 
 @mixin links {
     a {
-        color: map-get($colors, 'black');
+        color: inherit;
 
         &.no-underline {
             text-decoration: none;
