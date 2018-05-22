@@ -28,3 +28,31 @@
 
     {% include 'zine/issue/__i_article_set.html' %}
 {% endblock %}
+
+{% block ld_json %}
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "PublicationIssue",
+            "name": "{{ issue.title }}",
+            "description": "{{ issue.synopsis.rendered|striptags|escapejs }}",
+
+            {% if issue.cover_image %}
+                "image": [
+                    "{{ issue.cover_image.image.url }}"
+                ],
+            {% endif %}
+
+            {% if issue.publication_date %}
+                "datePublished": "{{ issue.publication_date|date:'c' }}",
+            {% endif %}
+
+            "dateModified": "{{ issue.updated_time|date:'c' }},
+
+            "publisher": {
+                "@type": "Organization",
+                "@id": "{% url 'about:about' %}"
+            }
+        }
+    </script>
+{% endblock ld_json %}
