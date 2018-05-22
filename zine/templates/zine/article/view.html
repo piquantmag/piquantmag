@@ -93,14 +93,20 @@
             "@context": "http://schema.org",
             "@type": "Article",
             "headline": "{{ article.title }}",
-            "description": "{{ article.synopsis.rendered|striptags }}",
+            "description": "{{ article.synopsis.rendered|striptags|escapejs }}",
+
             {% if article.cover_image %}
-            "image": [
-                "{{ article.cover_image.image.url }}"
-            ],
+                "image": [
+                    "{{ article.cover_image.image.url }}"
+                ],
             {% endif %}
-            "datePublished": "{{ article.issue.publication_date|date:'c' }}",
+
+            {% if article.issue.publication_date %}
+                "datePublished": "{{ article.issue.publication_date|date:'c' }}",
+            {% endif %}
+
             "dateModified": "{{ article.updated_time|date:'c' }},
+
             {% if article.authors.all %}
                 "author": [
                 {% for author in article.authors.all %}
