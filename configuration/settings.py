@@ -116,13 +116,16 @@ WSGI_APPLICATION = 'configuration.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'mysql.connector.django',
         'HOST': os.getenv('DATABASE_HOST', 'localhost'),
         'PORT': os.getenv('DATABASE_PORT', 3306),
         'NAME': os.getenv('DATABASE_NAME'),
         'USER': os.getenv('DATABASE_USER'),
         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
         'CONN_MAX_AGE': 300,
+        'OPTIONS': {
+            'use_pure': True,
+        },
     }
 }
 

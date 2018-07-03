@@ -1,31 +1,24 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [packages]
-
 zappa = "*"
 django = "~=2.0.4"
 django-storages = "*"
-"boto3" = "*"
-mysqlclient = "*"
+boto3 = "*"
 rollbar = "*"
 django-webpack-loader = "*"
 django-markupfield = "*"
 django-ordered-model = "*"
 markdown = "*"
 pillow = "*"
-
+mysql-connector-python = "*"
 
 [dev-packages]
-
 coverage = "*"
 django-debug-toolbar = "*"
 
-
 [requires]
-
 python_version = "3.6"
