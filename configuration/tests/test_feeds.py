@@ -1,20 +1,23 @@
 from datetime import timedelta
 
-from django.test import TestCase
+import pytest
 from django.utils import timezone
 
 from configuration import feeds
 from zine import models
 
 
-class IssueFeedTestCase(TestCase):
-    def setUp(self):
-        self.feed = feeds.IssueFeed()
+@pytest.fixture
+def feed():
+    return feeds.IssueFeed()
 
-    def test_items_when_no_issues(self):
-        self.assertListEqual([], list(self.feed.items()))
 
-    def test_items_when_no_published_issues(self):
+@pytest.mark.django_db
+class TestIssueFeed:
+    def test_items_when_no_issues(self, feed):
+        assert list(feed.items()) == []
+
+    def test_items_when_no_published_issues(self, feed):
         models.Issue.objects.create(
             title='Unpublished Issue',
             slug='unpublished-issue',
@@ -22,9 +25,9 @@ class IssueFeedTestCase(TestCase):
             synopsis='An unpublished issue',
         )
 
-        self.assertListEqual([], list(self.feed.items()))
+        assert list(feed.items()) == []
 
-    def test_items_when_published_issues(self):
+    def test_items_when_published_issues(self, feed):
         issue = models.Issue.objects.create(
             title='Published Issue',
             slug='published-issue',
@@ -32,7 +35,7 @@ class IssueFeedTestCase(TestCase):
             synopsis='A published issue',
         )
 
-        self.assertIn(issue, self.feed.items())
+        assert issue in feed.items()
 
-    def test_item_title(self):
-        self.assertEqual('Foo | Piquant', self.feed.item_title('Foo'))
+    def test_item_title(self, feed):
+        assert feed.item_title('Foo') == 'Foo | Piquant'
