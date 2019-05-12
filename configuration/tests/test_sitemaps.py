@@ -1,48 +1,71 @@
 from datetime import timedelta
 from unittest import mock
 
-from django.test import TestCase
+import pytest
 from django.utils import timezone
 
 from configuration import sitemaps
 from zine import models
 
 
-class IssueSiteMapTestCase(TestCase):
-    def setUp(self):
-        self.sitemap = sitemaps.IssueSitemap()
+@pytest.fixture
+def get_sitemap_class():
+    def _get_sitemap_class(sitemap_type):
+        return {
+            'issue': sitemaps.IssueSitemap,
+            'article': sitemaps.ArticleSitemap,
+            'miscellaneous': sitemaps.MiscellaneousPageSitemap,
+        }.get(sitemap_type)
+    return _get_sitemap_class
 
-    def test_issue_sitemap_when_no_issues(self):
-        self.assertListEqual([], list(self.sitemap.items()))
 
-    def test_issue_sitemap_when_no_published_issues(self):
+@pytest.fixture
+def example_pages():
+    return [
+        'someapp:somepage',
+        'someotherapp:somepage',
+    ]
+
+
+@pytest.mark.django_db
+class TestIssueSiteMap:
+    def test_issue_sitemap_when_no_issues(self, get_sitemap_class):
+        sitemap = get_sitemap_class('issue')()
+        assert list(sitemap.items()) == []
+
+    def test_issue_sitemap_when_no_published_issues(self, get_sitemap_class):
+        sitemap = get_sitemap_class('issue')()
+
         models.Issue.objects.create(
             title='Unpublished Issue',
             slug='unpublished-issue',
             publication_date=timezone.now() + timedelta(hours=1),
             synopsis='An unpublished issue',
         )
-        self.assertListEqual([], list(self.sitemap.items()))
+        assert list(sitemap.items()) == []
 
-    def test_issue_sitemap_when_published_issues(self):
+    def test_issue_sitemap_when_published_issues(self, get_sitemap_class):
+        sitemap = get_sitemap_class('issue')()
+
         issue = models.Issue.objects.create(
             title='Published Issue',
             slug='published-issue',
             publication_date=timezone.now(),
             synopsis='A published issue',
         )
-        self.assertIn(issue, self.sitemap.items())
-        self.assertEqual(issue.updated_time, self.sitemap.lastmod(issue))
+        assert issue in sitemap.items()
+        assert sitemap.lastmod(issue) == issue.updated_time
 
 
-class ArticleSiteMapTestCase(TestCase):
-    def setUp(self):
-        self.sitemap = sitemaps.ArticleSitemap()
+@pytest.mark.django_db
+class TestArticleSiteMap:
+    def test_article_sitemap_when_no_articles(self, get_sitemap_class):
+        sitemap = get_sitemap_class('article')()
+        assert list(sitemap.items()) == []
 
-    def test_article_sitemap_when_no_articles(self):
-        self.assertListEqual([], list(self.sitemap.items()))
+    def test_article_sitemap_when_no_published_articles(self, get_sitemap_class):
+        sitemap = get_sitemap_class('article')()
 
-    def test_article_sitemap_when_no_published_articles(self):
         issue = models.Issue.objects.create(
             title='Unpublished Issue',
             slug='unpublished-issue',
@@ -57,9 +80,11 @@ class ArticleSiteMapTestCase(TestCase):
             synopsis='An unpublished issue',
         )
 
-        self.assertListEqual([], list(self.sitemap.items()))
+        assert list(sitemap.items()) == []
 
-    def test_article_sitemap_when_published_articles(self):
+    def test_article_sitemap_when_published_articles(self, get_sitemap_class):
+        sitemap = get_sitemap_class('article')()
+
         issue = models.Issue.objects.create(
             title='Unpublished Issue',
             slug='unpublished-issue',
@@ -74,33 +99,27 @@ class ArticleSiteMapTestCase(TestCase):
             synopsis='An unpublished issue',
         )
 
-        self.assertIn(article, self.sitemap.items())
-        self.assertEqual(article.updated_time, self.sitemap.lastmod(article))
+        assert article in sitemap.items()
+        assert sitemap.lastmod(article) == article.updated_time
 
 
-class MiscellaneousPagesSitemapTestCase(TestCase):
-    def setUp(self):
+@pytest.mark.django_db
+class TestMiscellaneousPagesSitemap:
+    def test_lastmod(self, get_sitemap_class, example_pages):
+        sitemap = get_sitemap_class('miscellaneous')(example_pages)
 
-        self.pages = [
-            'someapp:somepage',
-            'someotherapp:somepage',
-        ]
-        self.sitemap = sitemaps.MiscellaneousPageSitemap(self.pages)
-
-    def test_lastmod(self):
         expected = timezone.now()
-        actual = self.sitemap.lastmod(None)
-        self.assertEqual(expected.year, actual.year)
-        self.assertEqual(expected.month, actual.month)
-        self.assertEqual(expected.day, actual.day)
-        self.assertEqual(expected.hour, actual.hour)
-        self.assertEqual(expected.minute, actual.minute)
+        actual = sitemap.lastmod(None)
+        assert (actual.year, actual.month, actual.day, actual.hour, actual.minute) == (expected.year, expected.month, expected.day, expected.hour, expected.minute)
 
-    def test_location(self):
-        for name in self.sitemap.names:
+    def test_location(self, get_sitemap_class, example_pages):
+        sitemap = get_sitemap_class('miscellaneous')(example_pages)
+
+        for name in sitemap.names:
             with mock.patch('configuration.sitemaps.reverse') as mock_reverse:
-                self.sitemap.location(name)
+                sitemap.location(name)
                 mock_reverse.assert_called_once_with(name)
 
-    def test_items(self):
-        self.assertListEqual(self.pages, self.sitemap.items())
+    def test_items(self, get_sitemap_class, example_pages):
+        sitemap = get_sitemap_class('miscellaneous')(example_pages)
+        assert sitemap.items() == example_pages
