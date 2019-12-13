@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 zappa = "*"
-django = "~=2.1.11"
+django = "~=2.1.15"
 django-storages = "*"
 "boto3" = "*"
 mysqlclient = "*"
