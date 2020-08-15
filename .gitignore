@@ -110,3 +110,7 @@ webpack-stats.json
 
 # JetBrains
 .idea/
+
+# Environment files
+.env
+.envrc
