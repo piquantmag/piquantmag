@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/piquantmag/piquantmag#readme",
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
+    "@babel/cli": "^7.24.7",
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
     "babel-core": "^6.26.3",
@@ -42,9 +42,9 @@
     "sass-loader": "^9.0.3",
     "style-loader": "^1.2.1",
     "terser-webpack-plugin": "^4.0.0",
-    "webpack": "^4.44.1",
+    "webpack": "^5.91.0",
     "webpack-bundle-tracker": "^0.4.3",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "npm": "^8.19.2"
