@@ -47,6 +47,6 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "npm": "^8.19.2"
+    "npm": "^11.1.0"
   }
 }
